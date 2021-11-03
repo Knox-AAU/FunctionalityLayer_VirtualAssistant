@@ -14,11 +14,11 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
         }
         public String EncodePredicate(string predicate)
         {
-            throw new Exception("Not implemented");
+            return predicate;
         }
         public String EncodeObject(string obj)
         {
-            throw new Exception("Not implemented");
+            return obj;
         }
     }
 }

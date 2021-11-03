@@ -10,7 +10,7 @@ namespace VirtualAssistantBusinessLogic
     {
         public string GetSparQL(string template, string subject, string predicate, string obj)
         {
-            return $"SELECT ?childLabel WHERE {{ ?child wdt:P26 {subject}. SERVICE wikibase:label {{ bd: serviceParam wikibase:language \"[AUTO_LANGUAGE]\". }}}}";//Gets wife
+            return $"SELECT ?child ?childLabel WHERE {{ ?child wdt:P26 {subject}. SERVICE wikibase:label {{ bd:serviceParam wikibase:language \"en\". }}}}";//Gets wife(s) [AUTO_LANGUAGE] er ikke læsbart
         }
     }
 }
