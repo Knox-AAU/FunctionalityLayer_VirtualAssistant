@@ -52,8 +52,8 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
             {
                 XmlReader xmlReader = XmlReader.Create(stream);
                 while (xmlReader.ReadToFollowing("literal"))
-                {
-                    responseString += xmlReader.Value;
+                {   
+                    responseString += xmlReader.ReadElementContentAsString();
                     responseString += "\n";
                 }
             }
