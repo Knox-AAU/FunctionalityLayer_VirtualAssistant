@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VirtualAssistantBusinessLogic
+namespace VirtualAssistantBusinessLogic.SparQL
 {
     public class SparQLTemplates
     {

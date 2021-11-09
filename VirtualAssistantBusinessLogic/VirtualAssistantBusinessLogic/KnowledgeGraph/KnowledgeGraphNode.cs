@@ -9,6 +9,6 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
     public class KnowledgeGraphNode
     {
         public string Name { get; set; }
-        public IEnumerable<string> Predicates { get; private set; }
+        public Dictionary<string, List<string>> Information { get; set; }
     }
 }

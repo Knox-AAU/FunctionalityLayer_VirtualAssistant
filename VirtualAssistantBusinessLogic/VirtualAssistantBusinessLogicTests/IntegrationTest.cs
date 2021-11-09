@@ -16,6 +16,7 @@ namespace VirtualAssistantBusinessLogicTests
             KnowledgeGraph kg = new KnowledgeGraph();
             KnowledgeGraphNode node = kg.FindNode("Donald Trump");
             Assert.AreEqual("Donald Trump", node.Name);
+            Assert.Contains("Melania Trump", node.Information["Spouse"]);
         }
     }
 }

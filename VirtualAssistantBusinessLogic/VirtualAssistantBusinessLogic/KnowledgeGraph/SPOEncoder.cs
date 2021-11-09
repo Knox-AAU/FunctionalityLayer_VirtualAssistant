@@ -14,7 +14,7 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
         }
         public String EncodePredicate(string predicate)
         {
-            return predicate;
+            return "wdt:P26";//Husband
         }
         public String EncodeObject(string obj)
         {
