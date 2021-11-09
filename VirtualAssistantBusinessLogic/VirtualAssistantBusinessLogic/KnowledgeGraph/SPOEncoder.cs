@@ -10,11 +10,26 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
     {
         public String EncodeSubject(string subject)
         {
-            return "wd:Q22686";//Donald Trump
+            /*
+             SELECT DISTINCT ?sLabel ?sDescription ?propLabel
+                WHERE {
+                  ?s wdt:P31 wd:Q5. # Is an instance "Human"
+                  ?s ?p "Donald Trump"@en . # Is object "Donald Trump"
+                  wd:Q5 wdt:P1963 ?prop .
+  
+                  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
+                }
+             */
+            //return "wd:Q22686";//Donald Trump
+            return $"?s ?p \"{subject}\"@en . ?s ";
         }
         public String EncodePredicate(string predicate)
         {
-            return "wdt:P26";//Husband
+            switch (predicate.ToLower())
+            {
+                case "spouse": return "wdt:P26";
+                default: return "wdt:P31";
+            }
         }
         public String EncodeObject(string obj)
         {

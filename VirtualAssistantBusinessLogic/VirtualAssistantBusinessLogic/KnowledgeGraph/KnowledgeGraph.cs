@@ -6,10 +6,11 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
 {
     public class KnowledgeGraph
     {
-        public KnowledgeGraphNode FindNode(string query)
+        public List<KnowledgeGraphNode> FindNodes(string query)
         {
             SparQLConnection sparqlConnection = new SparQLConnection();
-            SparQLBuilder sparqlBuilder = new SparQLBuilder(query);
+            //TODO figure out which builder to create
+            SparQLBuilder sparqlBuilder = new PersonSparQLBuilder(query);
             string sparqlQuery = sparqlBuilder.ToString();
             Dictionary<string, List<string>> result = sparqlConnection.ExecuteQuery(sparqlQuery);
 

@@ -15,17 +15,11 @@ namespace VirtualAssistantBusinessLogic.SparQL
             Query = query;
         }
 
-        private string Query { get; set; }
-        private SPOEncoder SPOEncoder { get; set; }
-
-        public SparQLBuilder DetectAndUseTemplate()
-        {
-            throw new NotImplementedException();
-        }
+        protected string Query { get; set; }
+        protected SPOEncoder SPOEncoder { get; set; }
 
         public override string ToString()
         {
-            
              //TODO split into subject and predicate and lemmatize
             string subject = Query;
             string predicate = "Wife";
@@ -38,7 +32,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
             return Select("Predicate", "Object").Where().SubjectIs(encodedSubject).PredicateAs("Predicate").ObjectAs("Object").ToString();
         }
 
-        private SparQLSelect Select(params string[] values)
+        protected SparQLSelect Select(params string[] values)
         {
             return new SparQLSelect().Select(values);
         }
