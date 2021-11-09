@@ -29,15 +29,17 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 XmlReader xmlReader = XmlReader.Create(stream);
                 while (xmlReader.ReadToFollowing("result"))
                 {
-                    xmlReader.ReadToDescendant("binding");
-                    string key = xmlReader.GetAttribute("name");
-                    xmlReader.ReadToDescendant("literal");
-                    key = key.Substring(0, key.Length - "Label".Length);
-                    if (!results.ContainsKey(key))
+                    while (xmlReader.ReadToFollowing("binding"))
                     {
-                        results[key] = new List<string>();
+                        string key = xmlReader.GetAttribute("name");
+                        xmlReader.ReadToDescendant("literal");
+                        key = key.Substring(0, key.Length - "Label".Length);
+                        if (!results.ContainsKey(key))
+                        {
+                            results[key] = new List<string>();
+                        }
+                        results[key].Add(xmlReader.ReadElementContentAsString());
                     }
-                    results[key].Add(xmlReader.ReadElementContentAsString());
                 }
             }
 

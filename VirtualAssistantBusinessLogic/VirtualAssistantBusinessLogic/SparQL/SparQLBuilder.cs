@@ -34,26 +34,13 @@ namespace VirtualAssistantBusinessLogic.SparQL
             string encodedSubject = SPOEncoder.EncodeSubject(subject);
             string encodedPredicate = SPOEncoder.EncodePredicate(predicate);
 
-            SparQLCondition where = new SparQLCondition();
-            string sparqlWhere = where.SubjectIs(encodedSubject).PredicateIs(encodedPredicate).As("Spouse").ToString();
-
             //Return the SparQL string
-            return $"{Select("Spouse")} {sparqlWhere}";
+            return Select("Predicate", "Object").Where().SubjectIs(encodedSubject).PredicateAs("Predicate").ObjectAs("Object").ToString();
         }
 
-        private string Select(params string[] values)
+        private SparQLSelect Select(params string[] values)
         {
-            if (values == null)
-            {
-                throw new Exception("Must select something.");//TODO maybe other type of exception
-            }
-            StringBuilder sb = new StringBuilder();
-            sb.Append("SELECT ");
-            foreach(string value in values)
-            {
-                sb.Append($"?{value}Label");
-            }
-            return sb.ToString();
+            return new SparQLSelect().Select(values);
         }
     }
 }
