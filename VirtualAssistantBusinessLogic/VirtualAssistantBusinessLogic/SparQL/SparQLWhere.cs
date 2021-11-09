@@ -98,6 +98,10 @@ namespace VirtualAssistantBusinessLogic.SparQL
 
         public override string ToString()
         {
+            if (SubjectString != "" && PredicateString != "" && ObjectString != "")
+            {
+                throw new Exception("WHERE triplet is not done");//TODO more specific exception
+            }
             StringBuilder sb = new StringBuilder();
             sb.Append(SparQLSelect.ToString());
             sb.Append("WHERE {");
