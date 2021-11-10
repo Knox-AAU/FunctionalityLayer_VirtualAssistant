@@ -14,6 +14,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
             Conditions = new List<string>();
             SparQLSelect = sparQLSelect;
             EncodedSPOs = new List<EncodedSPO>();
+            EncodedSPOs.Add(SparQLSelect.FromSubject);
         }
         private string SubjectString { get; set; } = "";
         private string ObjectString { get; set; } = "";
@@ -133,24 +134,18 @@ namespace VirtualAssistantBusinessLogic.SparQL
             StringBuilder sb = new StringBuilder();
             sb.Append(SparQLSelect.ToString());
             sb.Append("WHERE {");
-            int i = 0;
+            sb.Append(SparQLSelect.FromSubject.Triplet);
+            bool firstInUnion = true;
             foreach(string str in Conditions)
             {
-                if(i == 0)
+                if (!firstInUnion)
                 {
-                    sb.Append(str);
-                    sb.Append(" ");
+                    sb.Append("UNION");
                 }
-                else {
-                    if (i > 1)
-                    {
-                        sb.Append("UNION");
-                    }
-                    sb.Append(" {");
-                    sb.Append(str);
-                    sb.Append("}");
-                }
-                i++;
+                sb.Append(" {");
+                sb.Append(str);
+                sb.Append("}");
+                firstInUnion = false;
             }
             sb.Append(" " + labelServiceSparQL);
             sb.Append("}");

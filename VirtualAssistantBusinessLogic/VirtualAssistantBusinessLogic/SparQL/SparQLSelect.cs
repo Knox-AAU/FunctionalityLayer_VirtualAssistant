@@ -14,11 +14,11 @@ namespace VirtualAssistantBusinessLogic.SparQL
             Selects = new List<string>();
         }
         private List<string> Selects { get; set; }
-        private string FromSubject { get; set; }
+        public EncodedSPO FromSubject { get; private set; }
 
         public SparQLSelect From(EncodedSPO fromSubject)
         {
-            FromSubject = fromSubject.Name;
+            FromSubject = fromSubject;
             return this;
         }
 
@@ -44,7 +44,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("SELECT ");
-            sb.Append(FromSubject);
+            sb.Append(FromSubject.Name);
             sb.Append(" ");
             foreach (string value in Selects)
             {

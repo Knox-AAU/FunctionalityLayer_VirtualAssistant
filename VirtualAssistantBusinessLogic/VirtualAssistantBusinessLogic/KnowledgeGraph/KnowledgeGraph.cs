@@ -34,7 +34,7 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
             foreach (var kvp in results)
             {
                 KnowledgeGraphNode node = new KnowledgeGraphNode();
-                node.Name = kvp.Key;//TODO figure out how to get the nodes own name (fx The node of "Barack Obama's wife" should be called "Michele Obama")
+                node.Id = kvp.Key;//TODO figure out how to get the nodes own name (fx The node of "Barack Obama's wife" should be called "Michele Obama")
                 node.Information = kvp.Value;
 
                 nodeList.Add(node);
