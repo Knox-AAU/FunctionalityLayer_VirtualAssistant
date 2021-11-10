@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VirtualAssistantBusinessLogic.KnowledgeGraph;
 
 namespace VirtualAssistantBusinessLogic.SparQL
 {
@@ -12,6 +13,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
         {
             Conditions = new List<string>();
             SparQLSelect = sparQLSelect;
+            EncodedSPOs = new List<EncodedSPO>();
         }
         private string SubjectString { get; set; } = "";
         private string ObjectString { get; set; } = "";
@@ -19,19 +21,37 @@ namespace VirtualAssistantBusinessLogic.SparQL
         private List<string> Conditions { get; set; }
         private const string labelServiceSparQL = "SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }";
         public SparQLSelect SparQLSelect;
+        private List<EncodedSPO> EncodedSPOs { get; set; }
 
-        public SparQLWhere SubjectIs(string subject)
+        public SparQLWhere SubjectIs(EncodedSPO subject)
         {
-            SubjectString = subject;
+            if (EncodedSPOs.Contains(subject))
+            {
+                SubjectString = subject.Name;
+            }
+            else
+            {
+                SubjectString = $"{subject.Triplet}{subject.Name}";
+                EncodedSPOs.Add(subject);
+            }
+            
             if (TripletIsDone())
             {
                 AddCondition();
             }
             return this;
         }
-        public SparQLWhere PredicateIs(string predicate)
+        public SparQLWhere PredicateIs(EncodedSPO predicate)
         {
-            PredicateString = predicate;
+            if (EncodedSPOs.Contains(predicate))
+            {
+                PredicateString = predicate.Name;
+            }
+            else
+            {
+                PredicateString = $"{predicate.Triplet}{predicate.Name}";
+                EncodedSPOs.Add(predicate);
+            }
             if (TripletIsDone())
             {
                 AddCondition();
@@ -39,9 +59,17 @@ namespace VirtualAssistantBusinessLogic.SparQL
             return this;
         }
 
-        public SparQLWhere ObjectIs(string obj)
+        public SparQLWhere ObjectIs(EncodedSPO obj)
         {
-            ObjectString = obj;
+            if (EncodedSPOs.Contains(obj))
+            {
+                SubjectString = obj.Name;
+            }
+            else
+            {
+                SubjectString = $"{obj.Triplet}{obj.Name}";
+                EncodedSPOs.Add(obj);
+            }
             if (TripletIsDone())
             {
                 AddCondition();

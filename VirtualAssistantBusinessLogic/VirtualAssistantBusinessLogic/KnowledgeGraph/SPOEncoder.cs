@@ -8,32 +8,25 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
 {
     public class SPOEncoder
     {
-        public String EncodeSubject(string subject)
+        private int id = 0;
+        public EncodedSPO EncodeSubject(string subject)
         {
-            /*
-             SELECT DISTINCT ?sLabel ?sDescription ?propLabel
-                WHERE {
-                  ?s wdt:P31 wd:Q5. # Is an instance "Human"
-                  ?s ?p "Donald Trump"@en . # Is object "Donald Trump"
-                  wd:Q5 wdt:P1963 ?prop .
-  
-                  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE]". }
-                }
-             */
-            //return "wd:Q22686";//Donald Trump
-            return $"?s ?p \"{subject}\"@en . ?s ";
+            return new EncodedSPO($"?s{id} ?p \"{subject}\"@en . ", $"?s{id++} ");
         }
-        public String EncodePredicate(string predicate)
+        public EncodedSPO EncodePredicate(string predicate)
         {
             switch (predicate.ToLower())
             {
-                case "spouse": return "wdt:P26";
-                default: return "wdt:P31";
+                case "spouse": return new EncodedSPO("", "wdt:P26");
+                case "birth name": return new EncodedSPO("", "wdt:P1477");
+                case "date of birth": return new EncodedSPO("", "wdt:P569");
+                case "occupation": return new EncodedSPO("", "wdt:P106");
+                default: return new EncodedSPO("", "wdt:P31");
             }
         }
-        public String EncodeObject(string obj)
+        public EncodedSPO EncodeObject(string obj)
         {
-            return obj;
+            throw new NotImplementedException();
         }
     }
 }

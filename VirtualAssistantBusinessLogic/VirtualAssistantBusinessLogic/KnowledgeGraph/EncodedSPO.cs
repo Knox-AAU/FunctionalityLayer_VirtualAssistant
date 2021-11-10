@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace VirtualAssistantBusinessLogic.KnowledgeGraph
 {
-    public class KnowledgeGraphNode
+    public class EncodedSPO
     {
-        public string Id { get; set; }
+        public EncodedSPO(string triplet, string name)
+        {
+            Triplet = triplet;
+            Name = name;
+        }
+        public string Triplet { get; set; }
         public string Name { get; set; }
-        public Dictionary<string, List<string>> Information { get; set; }
     }
 }

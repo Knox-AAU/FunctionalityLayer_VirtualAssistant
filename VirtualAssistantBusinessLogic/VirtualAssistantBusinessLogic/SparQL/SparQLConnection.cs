@@ -6,14 +6,15 @@ using System.Xml;
 using System.Web;
 using System.Net;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace VirtualAssistantBusinessLogic.SparQL
 {
     public class SparQLConnection
     {
-        public Dictionary<string, List<string>> ExecuteQuery(string query)
+        public Dictionary<string, Dictionary<string, List<string>>> ExecuteQuery(string query)
         {
-            Dictionary<string, List<string>> results = new Dictionary<string, List<string>>();
+            Dictionary<string, Dictionary<string, List<string>>> results = new Dictionary<string, Dictionary<string, List<string>>>();
             string baseUrl = @"https://query.wikidata.org/sparql?query=";
 
 
@@ -29,16 +30,37 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 XmlReader xmlReader = XmlReader.Create(stream);
                 while (xmlReader.ReadToFollowing("result"))
                 {
+                    string id = "";
                     while (xmlReader.ReadToFollowing("binding"))
                     {
                         string key = xmlReader.GetAttribute("name");
-                        xmlReader.ReadToDescendant("literal");
-                        key = key.Substring(0, key.Length - "Label".Length);
-                        if (!results.ContainsKey(key))
-                        {
-                            results[key] = new List<string>();
+                        if (key.Contains("Label")) {
+                            //Remove Label from key
+                            key = key.Substring(0, key.Length - "Label".Length);
+                            if (!results[id].ContainsKey(key))
+                            {
+                                results[id][key] = new List<string>();
+                            }
+                            xmlReader.ReadToDescendant("literal");
+                            results[id][key].Add(xmlReader.ReadElementContentAsString());
                         }
-                        results[key].Add(xmlReader.ReadElementContentAsString());
+                        else
+                        {
+                            Regex filter = new Regex(@"(Q[0-9]+)");
+                            var match = filter.Match(xmlReader.ReadInnerXml());
+                            if (match.Success)
+                            {
+                                id = match.Value;
+                            }
+                            else
+                            {
+                                throw new Exception("Expected id could not be read");
+                            }
+                            if (!results.ContainsKey(id))
+                            {
+                                results[id] = new Dictionary<string, List<string>>();
+                            }
+                        }
                     }
                 }
             }

@@ -9,32 +9,28 @@ namespace VirtualAssistantBusinessLogic.SparQL
 {
     public class SparQLBuilder
     {
-        public SparQLBuilder(string query)
+        public SparQLBuilder()
         {
             SPOEncoder = new SPOEncoder();
-            Query = query;
         }
 
-        protected string Query { get; set; }
+        public string Query { get; set; }
         protected SPOEncoder SPOEncoder { get; set; }
 
         public override string ToString()
         {
              //TODO split into subject and predicate and lemmatize
             string subject = Query;
-            string predicate = "Wife";
 
-            
-            string encodedSubject = SPOEncoder.EncodeSubject(subject);
-            string encodedPredicate = SPOEncoder.EncodePredicate(predicate);
+            EncodedSPO encodedSubject = SPOEncoder.EncodeSubject(subject);
 
+            SparQLSelect sparQLSelect = new SparQLSelect();
             //Return the SparQL string
-            return Select("Predicate", "Object").Where().SubjectIs(encodedSubject).PredicateAs("Predicate").ObjectAs("Object").ToString();
-        }
-
-        protected SparQLSelect Select(params string[] values)
-        {
-            return new SparQLSelect().Select(values);
+            return sparQLSelect.From(encodedSubject)//TODO change from to the initial queries resulting start node
+                        .Select("Predicate", "Object")
+                        .Where()
+                            .SubjectIs(encodedSubject).PredicateAs("Predicate").ObjectAs("Object")
+                        .ToString();
         }
     }
 }

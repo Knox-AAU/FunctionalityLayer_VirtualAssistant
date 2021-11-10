@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VirtualAssistantBusinessLogic.KnowledgeGraph;
 
 namespace VirtualAssistantBusinessLogic.SparQL
 {
@@ -13,6 +14,13 @@ namespace VirtualAssistantBusinessLogic.SparQL
             Selects = new List<string>();
         }
         private List<string> Selects { get; set; }
+        private string FromSubject { get; set; }
+
+        public SparQLSelect From(EncodedSPO fromSubject)
+        {
+            FromSubject = fromSubject.Name;
+            return this;
+        }
 
         public SparQLSelect Select(params string[] values)
         {
@@ -36,6 +44,8 @@ namespace VirtualAssistantBusinessLogic.SparQL
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("SELECT ");
+            sb.Append(FromSubject);
+            sb.Append(" ");
             foreach (string value in Selects)
             {
                 sb.Append($"?{value}Label ");
