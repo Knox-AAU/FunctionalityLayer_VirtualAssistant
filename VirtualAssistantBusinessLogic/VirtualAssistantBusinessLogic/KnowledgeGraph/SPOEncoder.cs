@@ -11,17 +11,18 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
         private int id = 0;
         public EncodedSPO EncodeSubject(string subject)
         {
-            return new EncodedSPO($"?s{id} ?p \"{subject}\"@en . ", $"?s{id++} ");
+            return new EncodedSPO($"?s{id} rdfs:label \"{subject}\"@en . ", $"?s{id++} ");
         }
         public EncodedSPO EncodePredicate(string predicate)
         {
             switch (predicate.ToLower())
             {
-                case "spouse": return new EncodedSPO("", "wdt:P26");
-                case "birth name": return new EncodedSPO("", "wdt:P1477");
-                case "date of birth": return new EncodedSPO("", "wdt:P569");
-                case "occupation": return new EncodedSPO("", "wdt:P106");
-                default: return new EncodedSPO("", "wdt:P31");
+                case "spouse": return new EncodedSPO("", "dbo:spouse");
+                case "birth name": return new EncodedSPO("", "dbo:birthName");
+                case "date of birth": return new EncodedSPO("", "dbo:birthDate");
+                case "occupation": return new EncodedSPO("", "dbo:occupation");
+                case "type": return new EncodedSPO("", "rdf:type");
+                default: throw new ArgumentException($"Unknown predicate: '{predicate}'");
             }
         }
         public EncodedSPO EncodeObject(string obj)

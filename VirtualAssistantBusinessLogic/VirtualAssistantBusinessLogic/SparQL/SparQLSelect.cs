@@ -48,7 +48,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
             sb.Append(" ");
             foreach (string value in Selects)
             {
-                sb.Append($"?{value}Label ");
+                sb.Append($"?{value} ");
             }
             return sb.ToString();
         }

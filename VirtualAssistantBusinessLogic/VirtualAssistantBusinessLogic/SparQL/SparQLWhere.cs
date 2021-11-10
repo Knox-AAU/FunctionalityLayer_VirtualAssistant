@@ -138,7 +138,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 sb.Append(" ");
                 sb.Append(str);
             }
-            sb.Append(" "+labelServiceSparQL);
+            //sb.Append(" "+labelServiceSparQL);
             sb.Append("}");
             return sb.ToString();
         }

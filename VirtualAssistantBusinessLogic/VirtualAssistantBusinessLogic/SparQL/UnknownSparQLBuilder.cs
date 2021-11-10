@@ -19,13 +19,13 @@ namespace VirtualAssistantBusinessLogic.SparQL
             SparQLSelect sparQLSelect = new SparQLSelect();
             //Return the SparQL string
             return sparQLSelect.From(encodedSubject)
-                        .Select("Type", "Occupation", "birth_name", "date_of_birth", "Spouse")
+                        .Select("Type", "Occupation"/*, "birth_name", "date_of_birth", "Spouse"*/)
                         .Where()
                             .SubjectIs(encodedSubject).PredicateIs(SPOEncoder.EncodePredicate("Type")).ObjectAs("Type")
                             .SubjectIs(encodedSubject).PredicateIs(SPOEncoder.EncodePredicate("Occupation")).ObjectAs("Occupation")
-                            .SubjectIs(encodedSubject).PredicateIs(SPOEncoder.EncodePredicate("birth name")).ObjectAs("birth_name")
-                            .SubjectIs(encodedSubject).PredicateIs(SPOEncoder.EncodePredicate("date of birth")).ObjectAs("date_of_birth")
-                            .SubjectIs(encodedSubject).PredicateIs(SPOEncoder.EncodePredicate("Spouse")).ObjectAs("Spouse")
+                            //.SubjectIs(encodedSubject).PredicateIs(SPOEncoder.EncodePredicate("birth name")).ObjectAs("birth_name")
+                            //.SubjectIs(encodedSubject).PredicateIs(SPOEncoder.EncodePredicate("date of birth")).ObjectAs("date_of_birth")
+                            //.SubjectIs(encodedSubject).PredicateIs(SPOEncoder.EncodePredicate("Spouse")).ObjectAs("Spouse")
                         .ToString();
         }
     }

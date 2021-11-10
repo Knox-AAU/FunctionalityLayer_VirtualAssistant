@@ -15,7 +15,13 @@ namespace VirtualAssistantBusinessLogic.SparQL
         public Dictionary<string, Dictionary<string, List<string>>> ExecuteQuery(string query)
         {
             Dictionary<string, Dictionary<string, List<string>>> results = new Dictionary<string, Dictionary<string, List<string>>>();
-            string baseUrl = @"https://query.wikidata.org/sparql?query=";
+            string baseUrl = @"https://dbpedia.org/sparql"
+                            +@"?default-graph-uri=http%3A%2F%2Fdbpedia.org"
+                            +@"&format=text%2Fxml"//format=text/xml
+                            +@"&timeout=30000"
+                            +@"&signal_void=on"
+                            +@"&signal_unconnected=on"
+                            +@"&query=";
 
 
             string url = baseUrl + HttpUtility.UrlEncode(query);
