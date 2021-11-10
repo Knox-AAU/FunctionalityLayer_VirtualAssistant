@@ -133,12 +133,26 @@ namespace VirtualAssistantBusinessLogic.SparQL
             StringBuilder sb = new StringBuilder();
             sb.Append(SparQLSelect.ToString());
             sb.Append("WHERE {");
+            int i = 0;
             foreach(string str in Conditions)
             {
-                sb.Append(" ");
-                sb.Append(str);
+                if(i == 0)
+                {
+                    sb.Append(str);
+                    sb.Append(" ");
+                }
+                else {
+                    if (i > 1)
+                    {
+                        sb.Append("UNION");
+                    }
+                    sb.Append(" {");
+                    sb.Append(str);
+                    sb.Append("}");
+                }
+                i++;
             }
-            sb.Append(" "+labelServiceSparQL);
+            sb.Append(" " + labelServiceSparQL);
             sb.Append("}");
             return sb.ToString();
         }

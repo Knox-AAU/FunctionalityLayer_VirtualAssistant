@@ -42,7 +42,11 @@ namespace VirtualAssistantBusinessLogic.SparQL
                                 results[id][key] = new List<string>();
                             }
                             xmlReader.ReadToDescendant("literal");
-                            results[id][key].Add(xmlReader.ReadElementContentAsString());
+                            string value = xmlReader.ReadElementContentAsString();
+                            if (!results[id][key].Contains(value))
+                            {
+                                results[id][key].Add(value);
+                            }
                         }
                         else
                         {
