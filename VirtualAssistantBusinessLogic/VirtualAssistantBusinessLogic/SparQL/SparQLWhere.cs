@@ -13,8 +13,11 @@ namespace VirtualAssistantBusinessLogic.SparQL
         {
             Conditions = new List<string>();
             SparQLSelect = sparQLSelect;
-            EncodedSPOs = new List<EncodedSPO>();
-            EncodedSPOs.Add(SparQLSelect.FromSubject);
+            EncodedSPOs = new Dictionary<string, EncodedSPO>();
+            if (SparQLSelect.FromSubject != null)
+            {
+                EncodedSPOs.Add(SparQLSelect.FromSubjectRaw, SparQLSelect.FromSubject);
+            }
         }
         private string SubjectString { get; set; } = "";
         private string ObjectString { get; set; } = "";
@@ -22,36 +25,32 @@ namespace VirtualAssistantBusinessLogic.SparQL
         private List<string> Conditions { get; set; }
         private const string labelServiceSparQL = "SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }";
         public SparQLSelect SparQLSelect;
-        private List<EncodedSPO> EncodedSPOs { get; set; }
+        private Dictionary<string, EncodedSPO> EncodedSPOs { get; set; }
 
-        public SparQLWhere SubjectIs(EncodedSPO subject)
+        public SparQLWhere SubjectIs(string subject)
         {
-            if (EncodedSPOs.Contains(subject))
+            if (EncodedSPOs.ContainsKey(subject))
             {
-                SubjectString = subject.Name;
+                SubjectString = EncodedSPOs[subject].Name;
             }
-            else
-            {
-                SubjectString = $"{subject.Triplet}{subject.Name}";
-                EncodedSPOs.Add(subject);
+            else { 
+                SubjectString = subject; 
             }
-            
             if (TripletIsDone())
             {
                 AddCondition();
             }
             return this;
         }
-        public SparQLWhere PredicateIs(EncodedSPO predicate)
+        public SparQLWhere PredicateIs(string predicate)
         {
-            if (EncodedSPOs.Contains(predicate))
+            if (EncodedSPOs.ContainsKey(predicate))
             {
-                PredicateString = predicate.Name;
+                PredicateString = EncodedSPOs[predicate].Name;
             }
             else
             {
-                PredicateString = $"{predicate.Triplet}{predicate.Name}";
-                EncodedSPOs.Add(predicate);
+                PredicateString = predicate;
             }
             if (TripletIsDone())
             {
@@ -60,17 +59,9 @@ namespace VirtualAssistantBusinessLogic.SparQL
             return this;
         }
 
-        public SparQLWhere ObjectIs(EncodedSPO obj)
+        public SparQLWhere ObjectIs(string obj)
         {
-            if (EncodedSPOs.Contains(obj))
-            {
-                SubjectString = obj.Name;
-            }
-            else
-            {
-                SubjectString = $"{obj.Triplet}{obj.Name}";
-                EncodedSPOs.Add(obj);
-            }
+            ObjectString = obj;
             if (TripletIsDone())
             {
                 AddCondition();
@@ -125,6 +116,16 @@ namespace VirtualAssistantBusinessLogic.SparQL
             ObjectString = "";
         }
 
+        public SparQLWhere EncodePredicates(params string[] values)
+        {
+            var encoder = new SPOEncoder();
+            foreach(string value in values)
+            {
+                EncodedSPOs[value] = encoder.EncodePredicate(value);
+            }
+            return this;
+        }
+
         public override string ToString()
         {
             if (SubjectString != "" && PredicateString != "" && ObjectString != "")
@@ -132,9 +133,15 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 throw new Exception("WHERE triplet is not done");//TODO more specific exception
             }
             StringBuilder sb = new StringBuilder();
+            //Since we use fluent we need to include the select's ToString as well
             sb.Append(SparQLSelect.ToString());
+            //Start the WHERE
             sb.Append("WHERE {");
-            sb.Append(SparQLSelect.FromSubject.Triplet);
+            //Any encoded spos must be first (before the unions)
+            foreach(EncodedSPO encodedSPO in EncodedSPOs.Values)
+            {
+                sb.Append(encodedSPO.Triplet);
+            }
             bool firstInUnion = true;
             foreach(string str in Conditions)
             {

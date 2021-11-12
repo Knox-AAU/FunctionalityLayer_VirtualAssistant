@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using VirtualAssistantBusinessLogic.SparQL;
 using System.Collections.Generic;
 
@@ -12,13 +12,11 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
             SparQLBuilder sparqlBuilder = GetSparQLBuilder(node.Information["Type"][0]);
             sparqlBuilder.Query = node.Id;
             string sparqlQuery = sparqlBuilder.ToString();
-            Dictionary<string, Dictionary<string, List<string>>> result = sparqlConnection.ExecuteQuery(sparqlQuery);
+            var results = sparqlConnection.ExecuteQuery(sparqlQuery, new XMLResponseDecoder());
 
-            foreach(var kvp in result)
-            {
-                node.Information = kvp.Value;
-                break;//We know there is only one, so break after reading it
-            }
+            //Since we are looking for information of a specific node, we know that there is only one result
+            var result = results.FirstOrDefault();
+            node.Information = result.Value;
             return node;
         }
 
@@ -28,13 +26,14 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
             SparQLBuilder sparqlBuilder = GetSparQLBuilder("");
             sparqlBuilder.Query = query;
             string sparqlQuery = sparqlBuilder.ToString();
-            Dictionary<string, Dictionary<string, List<string>>> results = sparqlConnection.ExecuteQuery(sparqlQuery);
+            var results = sparqlConnection.ExecuteQuery(sparqlQuery, new XMLResponseDecoder());
 
             List<KnowledgeGraphNode> nodeList = new List<KnowledgeGraphNode>();
             foreach (var kvp in results)
             {
                 KnowledgeGraphNode node = new KnowledgeGraphNode();
-                node.Id = kvp.Key;//TODO figure out how to get the nodes own name (fx The node of "Barack Obama's wife" should be called "Michele Obama")
+                node.Id = kvp.Key;
+                //TODO figure out how to get the nodes own name (fx The node of "Barack Obama's wife" should be called "Michele Obama")
                 node.Information = kvp.Value;
 
                 nodeList.Add(node);

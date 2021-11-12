@@ -16,7 +16,7 @@ namespace VirtualAssistantBusinessLogicTests
         {
             KnowledgeGraph kg = new KnowledgeGraph();
             List<KnowledgeGraphNode> results = kg.FindNodes("Chris Evans");
-            Assert.AreEqual(3, results.Count);
+            Assert.AreEqual(21, results.Count);
             //TODO more asserts
         }
 

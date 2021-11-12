@@ -21,7 +21,8 @@ namespace VirtualAssistantBusinessLogic.SparQL
         {
              //TODO split into subject and predicate and lemmatize
             string subject = Query;
-
+            throw new NotImplementedException();
+            /*
             EncodedSPO encodedSubject = SPOEncoder.EncodeSubject(subject);
 
             SparQLSelect sparQLSelect = new SparQLSelect();
@@ -30,7 +31,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
                         .Select("Predicate", "Object")
                         .Where()
                             .SubjectIs(encodedSubject).PredicateAs("Predicate").ObjectAs("Object")
-                        .ToString();
+                        .ToString();*/
         }
     }
 }
