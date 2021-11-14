@@ -1,78 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
-using System.Web;
-using System.Net;
-using System.IO;
-using System.Text.RegularExpressions;
+﻿using System.Collections.Generic; // Required by Dictionary and List
+using System.Xml; // Required by XmlReader
+using System.Web; // Resuited by HttpUtility
+using System.Net; // Required by HttpWebRequest & HttpWebResponse
+using System.IO; // Required by Stream
 
 namespace VirtualAssistantBusinessLogic.SparQL
 {
     public class SparQLConnection
     {
-        public Dictionary<string, Dictionary<string, List<string>>> ExecuteQuery(string query)
+        public Dictionary<string, List<string>> ExecuteQuery(string query)
         {
-            Dictionary<string, Dictionary<string, List<string>>> results = new Dictionary<string, Dictionary<string, List<string>>>();
-            string baseUrl = @"https://dbpedia.org/sparql"
-                            +@"?default-graph-uri=http%3A%2F%2Fdbpedia.org"
-                            +@"&format=text%2Fxml"//format=text/xml
-                            +@"&timeout=30000"
-                            +@"&signal_void=on"
-                            +@"&signal_unconnected=on"
-                            +@"&query=";
+            string url = "https://dbpedia.org/sparql";
+            string queryUrl = url + "?&query=" + HttpUtility.UrlEncode(query) + "&format=xml";
 
+            Stream stream = WebRequest.Create(queryUrl).GetResponse().GetResponseStream();
+            XmlReader xml = XmlReader.Create(stream);
 
-            string url = baseUrl + HttpUtility.UrlEncode(query);
+            Dictionary<string, List<string>> data = new Dictionary<string, List<string>>();
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";//If the UserAgent is not set a 403 Forbidden is received from wiki.
-            //request.AutomaticDecompression = DecompressionMethods.GZip;
-
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-            using (Stream stream = response.GetResponseStream())
+            while (xml.ReadToFollowing("binding"))
             {
-                XmlReader xmlReader = XmlReader.Create(stream);
-                while (xmlReader.ReadToFollowing("result"))
+                string prop = xml[0];
+
+                xml.ReadToDescendant("literal");
+                
+                List<string> obj = new List<string>();
+                obj.Add(xml.ReadElementContentAsString());
+
+                if(data.ContainsKey(prop))
                 {
-                    string id = "";
-                    while (xmlReader.ReadToFollowing("binding"))
+                    if(!data[prop].Contains(obj[0])) // If list in dictionary does not contain the returned object.
                     {
-                        string key = xmlReader.GetAttribute("name");
-                        if (key.Contains("Label")) {
-                            //Remove Label from key
-                            key = key.Substring(0, key.Length - "Label".Length);
-                            if (!results[id].ContainsKey(key))
-                            {
-                                results[id][key] = new List<string>();
-                            }
-                            xmlReader.ReadToDescendant("literal");
-                            results[id][key].Add(xmlReader.ReadElementContentAsString());
-                        }
-                        else
-                        {
-                            Regex filter = new Regex(@"(Q[0-9]+)");
-                            var match = filter.Match(xmlReader.ReadInnerXml());
-                            if (match.Success)
-                            {
-                                id = match.Value;
-                            }
-                            else
-                            {
-                                throw new Exception("Expected id could not be read");
-                            }
-                            if (!results.ContainsKey(id))
-                            {
-                                results[id] = new Dictionary<string, List<string>>();
-                            }
-                        }
+                        data[prop].Add(obj[0]);
                     }
+                } else {
+                    data.Add(prop, obj);
                 }
             }
-
-            Console.WriteLine(results);
-            return results;
+            return data;
         }
     }
 }
