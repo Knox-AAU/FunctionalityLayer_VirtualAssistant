@@ -12,7 +12,6 @@ namespace VirtualAssistantBusinessLogic.SparQL
         public PersonSparQLBuilder(ISPOEncoder spoEncoder) : base(spoEncoder) { }
         public override string Build()
         {
-            //TODO split into subject and predicate and lemmatize
             string subject = Query;
 
             SparQLSelect sparQLSelect = new SparQLSelect();

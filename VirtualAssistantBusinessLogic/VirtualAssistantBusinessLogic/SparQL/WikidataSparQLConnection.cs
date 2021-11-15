@@ -44,7 +44,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
             {
                 case "": return new UnknownSparQLBuilder(spoEncoder);
                 case "human": return new PersonSparQLBuilder(spoEncoder);
-                case "country": throw new NotImplementedException();//TODO add this for the MVP
+                case "country": return new CountrySparQLBuilder(spoEncoder);
                 default: return new SparQLBuilder(spoEncoder);
             }
         }

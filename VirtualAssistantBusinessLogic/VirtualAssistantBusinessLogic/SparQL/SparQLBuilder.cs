@@ -19,7 +19,6 @@ namespace VirtualAssistantBusinessLogic.SparQL
 
         public virtual string Build()
         {
-            //TODO split into subject and predicate and lemmatize
             string subject = Query;
             throw new NotImplementedException();
             /*

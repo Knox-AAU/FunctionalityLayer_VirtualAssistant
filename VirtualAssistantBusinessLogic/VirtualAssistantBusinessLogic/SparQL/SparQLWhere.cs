@@ -131,7 +131,8 @@ namespace VirtualAssistantBusinessLogic.SparQL
         {
             if (SubjectString != "" && PredicateString != "" && ObjectString != "")
             {
-                throw new Exception("WHERE triplet is not done");//TODO more specific exception
+                //The strings should all be empty or a partial triplet is in progress
+                throw new Exception("WHERE triplet is not done");//TODO máybe more specific
             }
             StringBuilder sb = new StringBuilder();
             //Since we use fluent we need to include the select's ToString as well
