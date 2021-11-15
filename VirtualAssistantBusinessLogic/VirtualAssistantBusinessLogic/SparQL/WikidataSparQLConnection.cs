@@ -7,12 +7,18 @@ using System.Web;
 using System.Net;
 using System.IO;
 using System.Text.RegularExpressions;
+using VirtualAssistantBusinessLogic.KnowledgeGraph;
 
 namespace VirtualAssistantBusinessLogic.SparQL
 {
-    public class SparQLConnection
+    public class WikidataSparQLConnection : ISparQLConnection
     {
-        public Dictionary<string, Dictionary<string, List<string>>> ExecuteQuery(string query, IResponseDecoder responseDecoder)
+        public WikidataSparQLConnection()
+        {
+            ResponseDecoder = new XMLResponseDecoder();
+        }
+        private IResponseDecoder ResponseDecoder { get; set; }
+        public Dictionary<string, Dictionary<string, List<string>>> ExecuteQuery(string query)
         {
             string baseUrl = @"https://query.wikidata.org/sparql?query=";
             string url = baseUrl + HttpUtility.UrlEncode(query);
@@ -24,11 +30,23 @@ namespace VirtualAssistantBusinessLogic.SparQL
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             using (Stream stream = response.GetResponseStream())
             {
-                results = responseDecoder.Decode(stream);
+                results = ResponseDecoder.Decode(stream);
             }
 
             Console.WriteLine(results);
             return results;
+        }
+
+        public virtual SparQLBuilder GetSparQLBuilder(string type)
+        {
+            ISPOEncoder spoEncoder = new WikidataSPOEncoder();
+            switch (type.ToLower())
+            {
+                case "": return new UnknownSparQLBuilder(spoEncoder);
+                case "human": return new PersonSparQLBuilder(spoEncoder);
+                case "country": throw new NotImplementedException();//TODO add this for the MVP
+                default: return new SparQLBuilder(spoEncoder);
+            }
         }
     }
 }

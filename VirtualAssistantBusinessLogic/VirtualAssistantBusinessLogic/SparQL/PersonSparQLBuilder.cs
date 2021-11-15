@@ -9,7 +9,8 @@ namespace VirtualAssistantBusinessLogic.SparQL
 {
     public class PersonSparQLBuilder : SparQLBuilder
     {
-        public override string ToString()
+        public PersonSparQLBuilder(ISPOEncoder spoEncoder) : base(spoEncoder) { }
+        public override string Build()
         {
             //TODO split into subject and predicate and lemmatize
             string subject = Query;

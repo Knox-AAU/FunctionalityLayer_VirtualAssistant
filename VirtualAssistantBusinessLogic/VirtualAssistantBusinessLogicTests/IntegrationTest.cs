@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using VirtualAssistantBusinessLogic.KnowledgeGraph;
+using VirtualAssistantBusinessLogic.SparQL;
 
 namespace VirtualAssistantBusinessLogicTests
 {
@@ -14,7 +15,7 @@ namespace VirtualAssistantBusinessLogicTests
         [Test]
         public void it_can_get_nodes_from_the_knowledge_graph_api()
         {
-            KnowledgeGraph kg = new KnowledgeGraph();
+            KnowledgeGraph kg = new KnowledgeGraph(new SparQLConnectionFactory());
             List<KnowledgeGraphNode> results = kg.FindNodes("Chris Evans");
             Assert.AreEqual(21, results.Count);
             //TODO more asserts
@@ -23,7 +24,7 @@ namespace VirtualAssistantBusinessLogicTests
         [Test]
         public void it_can_get_information_for_a_specific_node()
         {
-            KnowledgeGraph kg = new KnowledgeGraph();
+            KnowledgeGraph kg = new KnowledgeGraph(new SparQLConnectionFactory());
             KnowledgeGraphNode result = kg.FindNodeInformation(GetDonaldTrumpKnowledgeGraphNode());
             Assert.IsTrue(result.Information.ContainsKey("Spouse"));
             Assert.AreEqual("Melania Trump", result.Information["Spouse"][0]);
@@ -36,7 +37,7 @@ namespace VirtualAssistantBusinessLogicTests
             node.Name = "Donald Trump";
             node.Information = new Dictionary<string, List<string>>();
             node.Information["Type"] = new List<string>();
-            node.Information["Type"].Add("Human");
+            node.Information["Type"].Add("human");
             return node;
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VirtualAssistantBusinessLogic.KnowledgeGraph
 {
-    public class SPOEncoder
+    public class WikidataSPOEncoder : ISPOEncoder
     {
         private int id = 0;
         public EncodedSPO EncodeSubject(string subject)

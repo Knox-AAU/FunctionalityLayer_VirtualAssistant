@@ -7,19 +7,19 @@ using VirtualAssistantBusinessLogic.KnowledgeGraph;
 
 namespace VirtualAssistantBusinessLogic.SparQL
 {
-    public class SparQLBuilder
+    public class SparQLBuilder : ISparQLBuilder
     {
-        public SparQLBuilder()
+        public SparQLBuilder(ISPOEncoder spoEncoder)
         {
-            SPOEncoder = new SPOEncoder();
+            SPOEncoder = spoEncoder;
         }
 
         public string Query { get; set; }
-        protected SPOEncoder SPOEncoder { get; set; }
+        protected ISPOEncoder SPOEncoder { get; set; }
 
-        public override string ToString()
+        public virtual string Build()
         {
-             //TODO split into subject and predicate and lemmatize
+            //TODO split into subject and predicate and lemmatize
             string subject = Query;
             throw new NotImplementedException();
             /*

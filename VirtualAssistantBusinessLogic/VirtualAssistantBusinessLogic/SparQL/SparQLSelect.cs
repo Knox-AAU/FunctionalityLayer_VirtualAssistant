@@ -20,7 +20,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
         public SparQLSelect From(string fromSubject)
         {
             FromSubjectRaw = fromSubject;
-            FromSubject = new SPOEncoder().EncodeSubject(fromSubject);
+            FromSubject = new WikidataSPOEncoder().EncodeSubject(fromSubject);
             return this;
         }
 

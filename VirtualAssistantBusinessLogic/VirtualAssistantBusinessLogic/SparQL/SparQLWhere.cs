@@ -33,8 +33,9 @@ namespace VirtualAssistantBusinessLogic.SparQL
             {
                 SubjectString = EncodedSPOs[subject].Name;
             }
-            else { 
-                SubjectString = subject; 
+            else
+            {
+                SubjectString = subject;
             }
             if (TripletIsDone())
             {
@@ -109,7 +110,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
         private void AddCondition()
         {
             Conditions.Add($"{SubjectString} {PredicateString} {ObjectString}. ");
-            
+
             //Reset SPO elements
             SubjectString = "";
             PredicateString = "";
@@ -118,8 +119,8 @@ namespace VirtualAssistantBusinessLogic.SparQL
 
         public SparQLWhere EncodePredicates(params string[] values)
         {
-            var encoder = new SPOEncoder();
-            foreach(string value in values)
+            var encoder = new WikidataSPOEncoder();
+            foreach (string value in values)
             {
                 EncodedSPOs[value] = encoder.EncodePredicate(value);
             }
@@ -138,12 +139,12 @@ namespace VirtualAssistantBusinessLogic.SparQL
             //Start the WHERE
             sb.Append("WHERE {");
             //Any encoded spos must be first (before the unions)
-            foreach(EncodedSPO encodedSPO in EncodedSPOs.Values)
+            foreach (EncodedSPO encodedSPO in EncodedSPOs.Values)
             {
                 sb.Append(encodedSPO.Triplet);
             }
             bool firstInUnion = true;
-            foreach(string str in Conditions)
+            foreach (string str in Conditions)
             {
                 if (!firstInUnion)
                 {

@@ -6,13 +6,18 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
 {
     public class KnowledgeGraph
     {
+        public KnowledgeGraph(SparQLConnectionFactory sparQLConnectionFactory)
+        {
+            SparQLConnectionFactory = sparQLConnectionFactory;
+        }
+        private SparQLConnectionFactory SparQLConnectionFactory { get; set; }
         public KnowledgeGraphNode FindNodeInformation(KnowledgeGraphNode node)
         {
-            SparQLConnection sparqlConnection = new SparQLConnection();
-            SparQLBuilder sparqlBuilder = GetSparQLBuilder(node.Information["Type"][0]);
+            ISparQLConnection sparqlConnection = SparQLConnectionFactory.GetConnection();
+            ISparQLBuilder sparqlBuilder = sparqlConnection.GetSparQLBuilder(node.Information["Type"][0]);
             sparqlBuilder.Query = node.Id;
-            string sparqlQuery = sparqlBuilder.ToString();
-            var results = sparqlConnection.ExecuteQuery(sparqlQuery, new XMLResponseDecoder());
+            string sparqlQuery = sparqlBuilder.Build();
+            var results = sparqlConnection.ExecuteQuery(sparqlQuery);
 
             //Since we are looking for information of a specific node, we know that there is only one result
             var result = results.FirstOrDefault();
@@ -22,11 +27,11 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
 
         public List<KnowledgeGraphNode> FindNodes(string query)
         {
-            SparQLConnection sparqlConnection = new SparQLConnection();
-            SparQLBuilder sparqlBuilder = GetSparQLBuilder("");
+            ISparQLConnection sparqlConnection = SparQLConnectionFactory.GetConnection();
+            ISparQLBuilder sparqlBuilder = sparqlConnection.GetSparQLBuilder("");
             sparqlBuilder.Query = query;
-            string sparqlQuery = sparqlBuilder.ToString();
-            var results = sparqlConnection.ExecuteQuery(sparqlQuery, new XMLResponseDecoder());
+            string sparqlQuery = sparqlBuilder.Build();
+            var results = sparqlConnection.ExecuteQuery(sparqlQuery);
 
             List<KnowledgeGraphNode> nodeList = new List<KnowledgeGraphNode>();
             foreach (var kvp in results)
@@ -38,18 +43,8 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
 
                 nodeList.Add(node);
             }
-            
-            return nodeList;
-        }
 
-        private SparQLBuilder GetSparQLBuilder(string type)
-        {
-            switch (type)
-            {
-                case "": return new UnknownSparQLBuilder();
-                case "Human": return new PersonSparQLBuilder();
-                default: return new SparQLBuilder();
-            }
+            return nodeList;
         }
     }
 }
