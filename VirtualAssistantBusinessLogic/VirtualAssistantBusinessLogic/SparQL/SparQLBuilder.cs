@@ -7,7 +7,10 @@ using VirtualAssistantBusinessLogic.KnowledgeGraph;
 
 namespace VirtualAssistantBusinessLogic.SparQL
 {
-    public class SparQLBuilder : ISparQLBuilder
+    /// <summary>
+    /// Abstract class for SparQL Builders
+    /// </summary>
+    public abstract class SparQLBuilder : ISparQLBuilder
     {
         public SparQLBuilder(ISPOEncoder spoEncoder)
         {
@@ -17,20 +20,24 @@ namespace VirtualAssistantBusinessLogic.SparQL
         public string Query { get; set; }
         protected ISPOEncoder SPOEncoder { get; set; }
 
+        public string[] WantedProperties { get; set; }
+
+        /// <summary>
+        /// Method for building the query
+        /// </summary>
+        /// <returns></returns>
         public virtual string Build()
         {
             string subject = Query;
-            throw new NotImplementedException();
-            /*
-            EncodedSPO encodedSubject = SPOEncoder.EncodeSubject(subject);
 
-            SparQLSelect sparQLSelect = new SparQLSelect();
+            SparQLSelect sparQLSelect = new SparQLSelect(SPOEncoder);
             //Return the SparQL string
-            return sparQLSelect.From(encodedSubject)//TODO change from to the initial queries resulting start node
-                        .Select("Predicate", "Object")
+            return sparQLSelect
+                        .Select("Type")
                         .Where()
-                            .SubjectIs(encodedSubject).PredicateAs("Predicate").ObjectAs("Object")
-                        .ToString();*/
+                            .EncodePredicates("Type")
+                            .SubjectIs(subject).PredicateIs("Type").ObjectAs("Type")
+                        .ToString();
         }
     }
 }

@@ -9,18 +9,20 @@ namespace VirtualAssistantBusinessLogic.SparQL
 {
     public class SparQLSelect
     {
-        public SparQLSelect()
+        public SparQLSelect(ISPOEncoder spoEncoder)
         {
             Selects = new List<string>();
+            SPOEncoder = spoEncoder;
         }
         private List<string> Selects { get; set; }
         public EncodedSPO FromSubject { get; private set; }
         public string FromSubjectRaw { get; private set; }
+        public ISPOEncoder SPOEncoder { get; set; }
 
         public SparQLSelect From(string fromSubject)
         {
             FromSubjectRaw = fromSubject;
-            FromSubject = new WikidataSPOEncoder().EncodeSubject(fromSubject);
+            FromSubject = SPOEncoder.EncodeSubject(fromSubject);
             return this;
         }
 

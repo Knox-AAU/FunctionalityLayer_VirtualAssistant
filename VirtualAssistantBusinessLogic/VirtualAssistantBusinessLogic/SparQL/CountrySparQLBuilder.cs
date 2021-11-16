@@ -7,6 +7,9 @@ using VirtualAssistantBusinessLogic.KnowledgeGraph;
 
 namespace VirtualAssistantBusinessLogic.SparQL
 {
+    /// <summary>
+    /// Builder class responsible for building sparql queries based on the template for information wanted about countries.
+    /// </summary>
     public class CountrySparQLBuilder : SparQLBuilder
     {
         public CountrySparQLBuilder(ISPOEncoder spoEncoder) : base(spoEncoder) { }
@@ -14,7 +17,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
         {
             string subject = Query;
 
-            SparQLSelect sparQLSelect = new SparQLSelect();
+            SparQLSelect sparQLSelect = new SparQLSelect(SPOEncoder);
 
             //Return the SparQL string
             return sparQLSelect //TODO: make function for this

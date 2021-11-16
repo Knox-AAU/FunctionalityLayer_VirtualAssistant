@@ -38,7 +38,7 @@ namespace VirtualAssistantBusinessLogicTests
             }
             Assert.IsTrue(index != -1, "The expected Denmark was not in the result list.");
             KnowledgeGraphNode denmarkNode = kg.FindNodeInformation(results[index]);
-            Assert.IsNotNull(denmarkNode);
+            Assert.AreEqual("Copenhagen", denmarkNode.Information["Capital"][0]);
             //TODO more asserts
         }
 

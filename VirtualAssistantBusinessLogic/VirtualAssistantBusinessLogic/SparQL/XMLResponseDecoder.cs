@@ -6,8 +6,17 @@ using System.Xml;
 
 namespace VirtualAssistantBusinessLogic.SparQL
 {
+    /// <summary>
+    /// Decoder for decoding XML responses from a sparql connection.
+    /// It assumes the format of the XML is the same as wikidata responses.
+    /// </summary>
     public class XMLResponseDecoder : IResponseDecoder
     {
+        /// <summary>
+        /// Decodes the XML read from the stream
+        /// </summary>
+        /// <param name="stream">XML stream</param>
+        /// <returns>Decoded response</returns>
         public Dictionary<string, Dictionary<string, List<string>>> Decode(Stream stream)
         {
             var results = new Dictionary<string, Dictionary<string, List<string>>>();

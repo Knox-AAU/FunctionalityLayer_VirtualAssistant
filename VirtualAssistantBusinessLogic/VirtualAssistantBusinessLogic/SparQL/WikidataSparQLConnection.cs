@@ -11,13 +11,23 @@ using VirtualAssistantBusinessLogic.KnowledgeGraph;
 
 namespace VirtualAssistantBusinessLogic.SparQL
 {
+    /// <summary>
+    /// SparQL connection to the wikidata sparql API
+    /// </summary>
     public class WikidataSparQLConnection : ISparQLConnection
     {
         public WikidataSparQLConnection()
         {
             ResponseDecoder = new XMLResponseDecoder();
         }
+
         private IResponseDecoder ResponseDecoder { get; set; }
+
+        /// <summary>
+        /// Executes the given query and returns the response decoded
+        /// </summary>
+        /// <param name="query">sparql query</param>
+        /// <returns>decoded API response</returns>
         public Dictionary<string, Dictionary<string, List<string>>> ExecuteQuery(string query)
         {
             string baseUrl = @"https://query.wikidata.org/sparql?query=";
@@ -33,10 +43,15 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 results = ResponseDecoder.Decode(stream);
             }
 
-            Console.WriteLine(results);
             return results;
         }
 
+        /// <summary>
+        /// Returns the SparQLBuilder that builds queries for this connection
+        /// based on the template from the given type
+        /// </summary>
+        /// <param name="type">type for template choice</param>
+        /// <returns>SparQL Builder for building queries</returns>
         public virtual SparQLBuilder GetSparQLBuilder(string type)
         {
             ISPOEncoder spoEncoder = new WikidataSPOEncoder();
@@ -45,7 +60,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 case "": return new UnknownSparQLBuilder(spoEncoder);
                 case "human": return new PersonSparQLBuilder(spoEncoder);
                 case "country": return new CountrySparQLBuilder(spoEncoder);
-                default: return new SparQLBuilder(spoEncoder);
+                default: throw new ArgumentException($"{type} has no SparQLBuilder associated.");
             }
         }
     }

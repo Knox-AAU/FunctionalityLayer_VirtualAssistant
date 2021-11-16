@@ -7,6 +7,9 @@ using VirtualAssistantBusinessLogic.KnowledgeGraph;
 
 namespace VirtualAssistantBusinessLogic.SparQL
 {
+    /// <summary>
+    /// SparQL Builder getting relevant information for persons
+    /// </summary>
     public class PersonSparQLBuilder : SparQLBuilder
     {
         public PersonSparQLBuilder(ISPOEncoder spoEncoder) : base(spoEncoder) { }
@@ -14,7 +17,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
         {
             string subject = Query;
 
-            SparQLSelect sparQLSelect = new SparQLSelect();
+            SparQLSelect sparQLSelect = new SparQLSelect(SPOEncoder);
             //Return the SparQL string
             return sparQLSelect
                         .Select("Type", "Occupation", "birth_name", "date_of_birth", "Spouse")

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace VirtualAssistantBusinessLogic.KnowledgeGraph
 {
+    /// <summary>
+    /// Interface for SPO encoders
+    /// </summary>
     public interface ISPOEncoder
     {
         public EncodedSPO EncodeSubject(string subject);

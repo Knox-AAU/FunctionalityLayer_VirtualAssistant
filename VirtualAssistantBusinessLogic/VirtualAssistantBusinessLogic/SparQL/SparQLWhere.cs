@@ -119,7 +119,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
 
         public SparQLWhere EncodePredicates(params string[] values)
         {
-            var encoder = new WikidataSPOEncoder();
+            ISPOEncoder encoder = SparQLSelect.SPOEncoder;
             foreach (string value in values)
             {
                 EncodedSPOs[value] = encoder.EncodePredicate(value);
