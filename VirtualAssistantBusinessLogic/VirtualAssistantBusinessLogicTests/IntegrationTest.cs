@@ -22,6 +22,27 @@ namespace VirtualAssistantBusinessLogicTests
         }
 
         [Test]
+        public void it_can_get_denmark_nodes_and_find_information_for_a_specific_denmark_from_the_knowledge_graph_api()
+        {
+            KnowledgeGraph kg = new KnowledgeGraph(new SparQLConnectionFactory());
+            List<KnowledgeGraphNode> results = kg.FindNodes("Denmark");
+            int index = -1;
+            for(int i = 0; i < results.Count; ++i)
+            {
+                KnowledgeGraphNode kgn = results[i];
+                if (kgn.Id == "wd:Q35")
+                {
+                    index = i;
+                    break;
+                }
+            }
+            Assert.IsTrue(index != -1, "The expected Denmark was not in the result list.");
+            KnowledgeGraphNode denmarkNode = kg.FindNodeInformation(results[index]);
+            Assert.IsNotNull(denmarkNode);
+            //TODO more asserts
+        }
+
+        [Test]
         public void it_can_get_information_for_a_specific_node()
         {
             KnowledgeGraph kg = new KnowledgeGraph(new SparQLConnectionFactory());
@@ -38,6 +59,22 @@ namespace VirtualAssistantBusinessLogicTests
             node.Information = new Dictionary<string, List<string>>();
             node.Information["Type"] = new List<string>();
             node.Information["Type"].Add("human");
+            return node;
+        }
+
+        private KnowledgeGraphNode GetDenmarkKnowledgeGraphNode()
+        {
+            KnowledgeGraphNode node = new KnowledgeGraphNode();
+            node.Id = "wd:Q35";
+            node.Name = "Denmark";
+            node.Information = new Dictionary<string, List<string>>();
+            node.Information["Type"] = new List<string>();
+            node.Information["Type"].Add("country");
+            node.Information["Type"].Add("state");
+            node.Information["Type"].Add("sovereign state");
+            node.Information["Type"].Add("colonial power");
+            node.Information["Type"].Add("country bordering the Baltic Sea");
+            node.Information["Type"].Add("autonomous country within the Kingdom of Denmark");
             return node;
         }
     }

@@ -21,6 +21,10 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
                 case "birth name": return new EncodedSPO("", "wdt:P1477");
                 case "date of birth": return new EncodedSPO("", "wdt:P569");
                 case "occupation": return new EncodedSPO("", "wdt:P106");
+                case "continent": return new EncodedSPO("", "p:P30/ps:P30");
+                case "official language": return new EncodedSPO("", "p:P37/ps:P37");
+                case "capital": return new EncodedSPO("", "p:P36/ps:P36");
+                case "population": return new EncodedSPO("", "p:P1082/ps:P1082");
                 default: return new EncodedSPO("", "wdt:P31");
             }
         }
