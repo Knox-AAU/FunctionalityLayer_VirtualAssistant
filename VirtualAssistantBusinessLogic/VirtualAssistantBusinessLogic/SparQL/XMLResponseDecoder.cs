@@ -21,7 +21,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
         {
             var results = new Dictionary<string, Dictionary<string, List<string>>>();
             XmlReader xmlReader = XmlReader.Create(stream);
-            
+
             //Read each result
             while (xmlReader.ReadToFollowing("result"))
             {
@@ -52,7 +52,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
                     }
                     else
                     {
-                        if(id == "_" && !results.ContainsKey(id))
+                        if (id == "_" && !results.ContainsKey(id))
                         {
                             results[id] = new Dictionary<string, List<string>>();
                         }

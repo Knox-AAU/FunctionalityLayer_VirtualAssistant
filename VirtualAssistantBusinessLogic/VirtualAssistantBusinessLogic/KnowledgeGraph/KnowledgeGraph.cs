@@ -14,7 +14,7 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
         {
             SparQLConnectionFactory = sparQLConnectionFactory;
         }
-        
+
         private SparQLConnectionFactory SparQLConnectionFactory { get; set; }
 
         /// <summary>
