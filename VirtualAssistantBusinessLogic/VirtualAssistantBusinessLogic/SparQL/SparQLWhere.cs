@@ -92,7 +92,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
             }
             return this;
         }
-        
+
         /// <summary>
         /// Specifies the name of the variable
         /// </summary>
