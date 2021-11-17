@@ -41,7 +41,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
                         }
                         else
                         {
-                            id = "_";//If the id can't be found collect it in this id
+                            id = "_";//If the id can't be found, collect it in this id
                         }
                         //If the id is new
                         if (!results.ContainsKey(id))
