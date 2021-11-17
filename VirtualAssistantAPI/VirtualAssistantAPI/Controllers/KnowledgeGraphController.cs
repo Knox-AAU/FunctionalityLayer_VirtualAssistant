@@ -28,7 +28,7 @@ namespace VirtualAssistantAPI.Controllers
         {
             if (String.IsNullOrWhiteSpace(name))
             {
-                return BadRequest("Name cannot be empty");
+                return BadRequest("Query parameter <name> may not be empty");
             }
             KnowledgeGraph graph = new KnowledgeGraph(new SparQLConnectionFactory());
             var nodes = graph.FindNodes(name);
@@ -45,7 +45,7 @@ namespace VirtualAssistantAPI.Controllers
         {
             if (String.IsNullOrWhiteSpace(name))
             {
-                return BadRequest("Name cannot be empty");
+                return BadRequest("Query parameter <name> may not be empty");
             }
             KnowledgeGraph graph = new KnowledgeGraph(new SparQLConnectionFactory());
             var nodes = graph.FindNodes(name);
