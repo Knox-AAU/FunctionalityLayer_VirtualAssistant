@@ -54,7 +54,7 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
 
             //Create the node list that is returned
             List<KnowledgeGraphNode> nodeList = new List<KnowledgeGraphNode>();
-            //Go through each result from the executed query and create and append the nodes to the node list
+            //Go through each key-value pair (kvp) from the executed query and create and append the nodes to the node list
             foreach (var kvp in results)
             {
                 KnowledgeGraphNode node = new KnowledgeGraphNode();
