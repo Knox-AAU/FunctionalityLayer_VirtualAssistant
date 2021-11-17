@@ -25,7 +25,7 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
         }
 
         /// <summary>
-        /// Encodes the predicate
+        /// Encodes the predicate by returning the wikidata id for the given predicate
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
