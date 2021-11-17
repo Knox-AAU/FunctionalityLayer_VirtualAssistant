@@ -13,7 +13,7 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
     {
         private int id = 0;
         /// <summary>
-        /// Encodes the subject returning a encoded spo with a triplet to get
+        /// Encodes the subject, returning an encoded spo. The encoded spo has a triplet to get
         /// the nodes with a label equal to the subject and a unique name for the
         /// triplet results.
         /// </summary>
