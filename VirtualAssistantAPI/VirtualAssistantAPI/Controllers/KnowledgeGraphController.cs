@@ -37,7 +37,7 @@ namespace VirtualAssistantAPI.Controllers
 
         [HttpGet]
         [Route("getNode")]
-        [ProducesResponseType(typeof(KnowledgeGraphNode),200)]
+        [ProducesResponseType(typeof(KnowledgeGraphNode), 200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         //public KnowledgeGraphNode GetNode(string id, string type) //This is the correct version, but for the MVP we use the one below
