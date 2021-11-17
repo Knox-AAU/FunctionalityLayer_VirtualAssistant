@@ -43,6 +43,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
             }
             return this;
         }
+        
         public SparQLWhere PredicateIs(string predicate)
         {
             if (EncodedSPOs.ContainsKey(predicate))
