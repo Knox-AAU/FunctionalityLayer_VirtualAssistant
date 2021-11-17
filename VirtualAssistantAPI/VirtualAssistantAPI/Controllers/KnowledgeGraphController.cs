@@ -20,22 +20,31 @@ namespace VirtualAssistantAPI.Controllers
         }
 
         [HttpGet]
-        [Route("[controller]/getNodes/{name}")]
-        public List<KnowledgeGraphNode> GetNodes(string name)
+        [Route("getNodes")]
+        public IActionResult GetNodes(string name)
         {
+            if (String.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest();
+            }
             KnowledgeGraph graph = new KnowledgeGraph(new SparQLConnectionFactory());
             var nodes = graph.FindNodes(name);
-            return nodes;
+            return new JsonResult(nodes);
         }
 
         [HttpGet]
-        [Route("[controller]/getNode/{name}")]
-        public KnowledgeGraphNode GetNode(string name)
+        [Route("getNode")]
+        //public KnowledgeGraphNode GetNode(string id, string type) //This is the correct version, but for the MVP we use the one below
+        public IActionResult GetNode(string name)
         {
+            if (String.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest();
+            }
             KnowledgeGraph graph = new KnowledgeGraph(new SparQLConnectionFactory());
             var nodes = graph.FindNodes(name);
             var node = graph.FindNodeInformation(nodes.FirstOrDefault());
-            return node;
+            return new JsonResult(node);
         }
     }
 }
