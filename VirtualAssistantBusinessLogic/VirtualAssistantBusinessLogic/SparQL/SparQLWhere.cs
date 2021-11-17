@@ -69,6 +69,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
             }
             return this;
         }
+        
         public SparQLWhere SubjectAs(string subject)
         {
             SubjectString = $"?{subject}";
@@ -78,6 +79,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
             }
             return this;
         }
+        
         public SparQLWhere PredicateAs(string predicate)
         {
             PredicateString = $"?{predicate}";
