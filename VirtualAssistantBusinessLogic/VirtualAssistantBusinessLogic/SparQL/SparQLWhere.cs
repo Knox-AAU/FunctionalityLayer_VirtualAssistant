@@ -7,6 +7,10 @@ using VirtualAssistantBusinessLogic.KnowledgeGraph;
 
 namespace VirtualAssistantBusinessLogic.SparQL
 {
+    /// <summary>
+    /// Class for fluently building SparQL queries
+    /// WILL ONLY WORK FOR WIKIDATA IN THE CURRENT STATE (because of the labelServiceSparQL)
+    /// </summary>
     public class SparQLWhere
     {
         public SparQLWhere(SparQLSelect sparQLSelect)
@@ -27,6 +31,12 @@ namespace VirtualAssistantBusinessLogic.SparQL
         public SparQLSelect SparQLSelect;
         private Dictionary<string, EncodedSPO> EncodedSPOs { get; set; }
 
+        /// <summary>
+        /// Specifies the subject of the sparql triplet as being equal to the
+        /// input subject.
+        /// </summary>
+        /// <param name="subject">Subject of the sparql triplet</param>
+        /// <returns></returns>
         public SparQLWhere SubjectIs(string subject)
         {
             if (EncodedSPOs.ContainsKey(subject))
@@ -43,6 +53,13 @@ namespace VirtualAssistantBusinessLogic.SparQL
             }
             return this;
         }
+
+        /// <summary>
+        /// Specifies the predicate of the sparql triplet as being equal to the
+        /// input parameter.
+        /// </summary>
+        /// <param name="predicate">Predicate of the sparql triplet</param>
+        /// <returns></returns>
         public SparQLWhere PredicateIs(string predicate)
         {
             if (EncodedSPOs.ContainsKey(predicate))
@@ -60,6 +77,12 @@ namespace VirtualAssistantBusinessLogic.SparQL
             return this;
         }
 
+        /// <summary>
+        /// Specifies the object of the sparql triplet as being equal to the
+        /// input parameter.
+        /// </summary>
+        /// <param name="obj">Object of the sparql triplet</param>
+        /// <returns></returns>
         public SparQLWhere ObjectIs(string obj)
         {
             ObjectString = obj;
@@ -69,6 +92,12 @@ namespace VirtualAssistantBusinessLogic.SparQL
             }
             return this;
         }
+
+        /// <summary>
+        /// Specifies the name of the variable
+        /// </summary>
+        /// <param name="subject">name of the subject variable</param>
+        /// <returns></returns>
         public SparQLWhere SubjectAs(string subject)
         {
             SubjectString = $"?{subject}";
@@ -78,6 +107,12 @@ namespace VirtualAssistantBusinessLogic.SparQL
             }
             return this;
         }
+
+        /// <summary>
+        /// Specifies the name of the variable
+        /// </summary>
+        /// <param name="predicate">name of the predicate variable</param>
+        /// <returns></returns>
         public SparQLWhere PredicateAs(string predicate)
         {
             PredicateString = $"?{predicate}";
@@ -88,6 +123,11 @@ namespace VirtualAssistantBusinessLogic.SparQL
             return this;
         }
 
+        /// <summary>
+        /// Specifies the name of the variable
+        /// </summary>
+        /// <param name="obj">name of the object variable</param>
+        /// <returns></returns>
         public SparQLWhere ObjectAs(string obj)
         {
             ObjectString = $"?{obj}";
@@ -98,6 +138,10 @@ namespace VirtualAssistantBusinessLogic.SparQL
             return this;
         }
 
+        /// <summary>
+        /// Checks wether the subject, predicate, and the object all have a value
+        /// </summary>
+        /// <returns></returns>
         private bool TripletIsDone()
         {
             if (SubjectString != "" && PredicateString != "" && ObjectString != "")
@@ -107,6 +151,9 @@ namespace VirtualAssistantBusinessLogic.SparQL
             return false;
         }
 
+        /// <summary>
+        /// Adds the current triplet to conditions so they can be used when building the query
+        /// </summary>
         private void AddCondition()
         {
             Conditions.Add($"{SubjectString} {PredicateString} {ObjectString}. ");
@@ -117,9 +164,15 @@ namespace VirtualAssistantBusinessLogic.SparQL
             ObjectString = "";
         }
 
+        /// <summary>
+        /// Encodes the values so they can be used in triplets that needs encoding.
+        /// Must be called BEFORE adding triplets that needs encoding
+        /// </summary>
+        /// <param name="values">values to be encoded</param>
+        /// <returns></returns>
         public SparQLWhere EncodePredicates(params string[] values)
         {
-            var encoder = new WikidataSPOEncoder();
+            ISPOEncoder encoder = SparQLSelect.SPOEncoder;
             foreach (string value in values)
             {
                 EncodedSPOs[value] = encoder.EncodePredicate(value);
@@ -127,12 +180,19 @@ namespace VirtualAssistantBusinessLogic.SparQL
             return this;
         }
 
+        /// <summary>
+        /// Builds the query
+        /// Note the query is build using UNION for each condition,
+        /// so that as much information as possible is returned by the query,
+        /// but if some information is missing the other information is still returned.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             if (SubjectString != "" && PredicateString != "" && ObjectString != "")
             {
                 //The strings should all be empty or a partial triplet is in progress
-                throw new Exception("WHERE triplet is not done");//TODO máybe more specific
+                throw new Exception("WHERE triplet is not done");
             }
             StringBuilder sb = new StringBuilder();
             //Since we use fluent we need to include the select's ToString as well

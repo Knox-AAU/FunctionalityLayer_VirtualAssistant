@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace VirtualAssistantBusinessLogic.SparQL
 {
+    /// <summary>
+    /// Interface for SparQL Connections
+    /// </summary>
     public interface ISparQLConnection
     {
         public SparQLBuilder GetSparQLBuilder(string type);

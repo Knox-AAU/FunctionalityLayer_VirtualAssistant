@@ -27,7 +27,7 @@ namespace VirtualAssistantBusinessLogicTests
             KnowledgeGraph kg = new KnowledgeGraph(new SparQLConnectionFactory());
             List<KnowledgeGraphNode> results = kg.FindNodes("Denmark");
             int index = -1;
-            for(int i = 0; i < results.Count; ++i)
+            for (int i = 0; i < results.Count; ++i)
             {
                 KnowledgeGraphNode kgn = results[i];
                 if (kgn.Id == "wd:Q35")
@@ -38,7 +38,7 @@ namespace VirtualAssistantBusinessLogicTests
             }
             Assert.IsTrue(index != -1, "The expected Denmark was not in the result list.");
             KnowledgeGraphNode denmarkNode = kg.FindNodeInformation(results[index]);
-            Assert.IsNotNull(denmarkNode);
+            Assert.AreEqual("Copenhagen", denmarkNode.Information["Capital"][0]);
             //TODO more asserts
         }
 

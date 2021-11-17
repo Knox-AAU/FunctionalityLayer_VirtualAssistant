@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="VirtualAssistantBusinessLogic.KnowledgeGraph.EncodedSPO">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KnowledgeGraph\EncodedSPO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VirtualAssistantBusinessLogic.KnowledgeGraph.KnowledgeGraph">
+    <Position X="7.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>KnowledgeGraph\KnowledgeGraph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VirtualAssistantBusinessLogic.KnowledgeGraph.KnowledgeGraphNode">
+    <Position X="10" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACEAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KnowledgeGraph\KnowledgeGraphNode.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VirtualAssistantBusinessLogic.KnowledgeGraph.WikidataSPOEncoder" BaseTypeListCollapsed="true">
+    <Position X="3.25" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAgAAAQAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>KnowledgeGraph\WikidataSPOEncoder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="VirtualAssistantBusinessLogic.SparQL.CountrySparQLBuilder">
+    <Position X="0.5" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SparQL\CountrySparQLBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VirtualAssistantBusinessLogic.SparQL.PersonSparQLBuilder">
+    <Position X="2.75" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SparQL\PersonSparQLBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VirtualAssistantBusinessLogic.SparQL.SparQLBuilder">
+    <Position X="3" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAAAgAgAAAAAEAAAAAA=</HashCode>
+      <FileName>SparQL\SparQLBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="VirtualAssistantBusinessLogic.SparQL.SparQLConnectionFactory">
+    <Position X="12.25" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>SparQL\SparQLConnectionFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VirtualAssistantBusinessLogic.SparQL.SparQLSelect">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAIAEAAACAAAAAAEAAAAAAIACQAAAAAA=</HashCode>
+      <FileName>SparQL\SparQLSelect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VirtualAssistantBusinessLogic.SparQL.SparQLWhere">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABEABAAAEAAAQEAEgBACAAAAgAAACAAAIAAAkIAAAAA=</HashCode>
+      <FileName>SparQL\SparQLWhere.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VirtualAssistantBusinessLogic.SparQL.UnknownSparQLBuilder">
+    <Position X="5" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SparQL\UnknownSparQLBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VirtualAssistantBusinessLogic.SparQL.WikidataSparQLConnection" BaseTypeListCollapsed="true">
+    <Position X="1.75" Y="9.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAIAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SparQL\WikidataSparQLConnection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="VirtualAssistantBusinessLogic.SparQL.XMLResponseDecoder" BaseTypeListCollapsed="true">
+    <Position X="7" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>SparQL\XMLResponseDecoder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="VirtualAssistantBusinessLogic.KnowledgeGraph.ISPOEncoder">
+    <Position X="1.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAgAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>KnowledgeGraph\ISPOEncoder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="VirtualAssistantBusinessLogic.SparQL.IResponseDecoder">
+    <Position X="9" Y="9.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>SparQL\IResponseDecoder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="VirtualAssistantBusinessLogic.SparQL.ISparQLBuilder">
+    <Position X="4.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAgAAAAAAAAAAAA=</HashCode>
+      <FileName>SparQL\ISparQLBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="VirtualAssistantBusinessLogic.SparQL.ISparQLConnection">
+    <Position X="4.25" Y="9.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SparQL\ISparQLConnection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

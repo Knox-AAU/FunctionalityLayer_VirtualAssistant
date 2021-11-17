@@ -6,13 +6,29 @@ using System.Threading.Tasks;
 
 namespace VirtualAssistantBusinessLogic.KnowledgeGraph
 {
+    /// <summary>
+    /// Encoder to encode subject, predicate and objects to the wikidata ontology.
+    /// </summary>
     public class WikidataSPOEncoder : ISPOEncoder
     {
         private int id = 0;
+        /// <summary>
+        /// Encodes the subject, returning an encoded spo. The encoded spo has a triplet to get
+        /// the nodes with a label equal to the subject and a unique name for the
+        /// triplet results.
+        /// </summary>
+        /// <param name="subject">Name/Label for the subject to encode</param>
+        /// <returns>EncodedSPO for the subject</returns>
         public EncodedSPO EncodeSubject(string subject)
         {
             return new EncodedSPO($"?s{id} ?p \"{subject}\"@en . ", $"?s{id++} ");
         }
+
+        /// <summary>
+        /// Encodes the predicate by returning the wikidata id for the given predicate
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public EncodedSPO EncodePredicate(string predicate)
         {
             switch (predicate.ToLower())
@@ -28,6 +44,12 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
                 default: return new EncodedSPO("", "wdt:P31");
             }
         }
+
+        /// <summary>
+        /// Not used so not implemented - Will throw a NotImplementedException!
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public EncodedSPO EncodeObject(string obj)
         {
             throw new NotImplementedException();

@@ -6,13 +6,22 @@ using System.Xml;
 
 namespace VirtualAssistantBusinessLogic.SparQL
 {
+    /// <summary>
+    /// Decoder for decoding XML responses from a sparql connection.
+    /// It assumes the format of the XML is the same as wikidata responses.
+    /// </summary>
     public class XMLResponseDecoder : IResponseDecoder
     {
+        /// <summary>
+        /// Decodes the XML read from the stream
+        /// </summary>
+        /// <param name="stream">XML stream</param>
+        /// <returns>Decoded response</returns>
         public Dictionary<string, Dictionary<string, List<string>>> Decode(Stream stream)
         {
             var results = new Dictionary<string, Dictionary<string, List<string>>>();
             XmlReader xmlReader = XmlReader.Create(stream);
-            
+
             //Read each result
             while (xmlReader.ReadToFollowing("result"))
             {
@@ -32,7 +41,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
                         }
                         else
                         {
-                            id = "_";//If the id can't be found collect it in this id
+                            id = "_";//If the id can't be found, collect it in this id
                         }
                         //If the id is new
                         if (!results.ContainsKey(id))
@@ -43,7 +52,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
                     }
                     else
                     {
-                        if(id == "_" && !results.ContainsKey(id))
+                        if (id == "_" && !results.ContainsKey(id))
                         {
                             results[id] = new Dictionary<string, List<string>>();
                         }
