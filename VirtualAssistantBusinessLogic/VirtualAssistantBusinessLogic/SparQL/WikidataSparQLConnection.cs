@@ -34,7 +34,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
             string url = baseUrl + HttpUtility.UrlEncode(query);
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";//If the UserAgent is not set a 403 Forbidden is received from wiki.
+            request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36";//If the UserAgent is not set, a 403 Forbidden is received from wiki.
 
             Dictionary<string, Dictionary<string, List<string>>> results;
             using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
