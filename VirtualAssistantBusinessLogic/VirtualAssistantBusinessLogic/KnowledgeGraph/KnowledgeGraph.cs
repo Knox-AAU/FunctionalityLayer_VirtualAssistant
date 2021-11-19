@@ -27,14 +27,14 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
         {
             ISparQLConnection sparqlConnection = SparQLConnectionFactory.GetConnection();
             // Get the types from the node that are supported by the connection
-            IEnumerable<string> supportedTypesFromNode = sparqlConnection.SupportedTypes.Intersect(node.Information["Type"]);
+            IEnumerable<string> supportedTypesInNode = sparqlConnection.SupportedTypes.Intersect(node.Information["Type"]);
             // If the connection does not support any of the node's types return the node as it is
-            if (supportedTypesFromNode.Count() == 0)
+            if (supportedTypesInNode.Count() == 0)
             {
                 return node;
             }
             // Get the sparql builder from the connection
-            ISparQLBuilder sparqlBuilder = sparqlConnection.GetSparQLBuilder(supportedTypesFromNode.First());
+            ISparQLBuilder sparqlBuilder = sparqlConnection.GetSparQLBuilder(supportedTypesInNode.First());
             // Build the query
             sparqlBuilder.Query = node.Id;
             string sparqlQuery = sparqlBuilder.Build();
