@@ -26,9 +26,19 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
         public KnowledgeGraphNode FindNodeInformation(KnowledgeGraphNode node)
         {
             ISparQLConnection sparqlConnection = SparQLConnectionFactory.GetConnection();
-            ISparQLBuilder sparqlBuilder = sparqlConnection.GetSparQLBuilder(node.Information["Type"][0]);
+            // Get the types from the node that are supported by the connection
+            IEnumerable<string> supportedTypesInNode = sparqlConnection.SupportedTypes.Intersect(node.Information["Type"]);
+            // If the connection does not support any of the node's types return the node as it is
+            if (supportedTypesInNode.Count() == 0)
+            {
+                return node;
+            }
+            // Get the sparql builder from the connection
+            ISparQLBuilder sparqlBuilder = sparqlConnection.GetSparQLBuilder(supportedTypesInNode.First());
+            // Build the query
             sparqlBuilder.Query = node.Id;
             string sparqlQuery = sparqlBuilder.Build();
+            // Execute the query
             Dictionary<string, Dictionary<string, List<string>>> results = sparqlConnection.ExecuteQuery(sparqlQuery);
 
             //Since we are looking for information of a specific node, we know that there is only one result

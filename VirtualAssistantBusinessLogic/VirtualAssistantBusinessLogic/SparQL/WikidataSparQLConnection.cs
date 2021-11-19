@@ -19,9 +19,15 @@ namespace VirtualAssistantBusinessLogic.SparQL
         public WikidataSparQLConnection()
         {
             ResponseDecoder = new XMLResponseDecoder();
+            SupportedTypes = new List<string> {
+                "", // Unknown entity - used to identify the entity
+                "Human",
+                "Country"
+            };
         }
 
         private IResponseDecoder ResponseDecoder { get; set; }
+        public List<string> SupportedTypes { get; private set; }
 
         /// <summary>
         /// Executes the given query and returns the response decoded

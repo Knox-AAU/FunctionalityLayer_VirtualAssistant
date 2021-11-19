@@ -11,6 +11,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
     /// </summary>
     public interface ISparQLConnection
     {
+        public List<string> SupportedTypes { get; }
         public SparQLBuilder GetSparQLBuilder(string type);
         public Dictionary<string, Dictionary<string, List<string>>> ExecuteQuery(string query);
     }
