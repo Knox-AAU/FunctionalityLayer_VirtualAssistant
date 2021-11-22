@@ -9,9 +9,9 @@ on:
   schedule:
     - cron: '15 23 * * *'
   push:
-    branches: [ release ]
+    branches: [ Release ]
   pull_request:
-    branches: [ release ]
+    branches: [ Release ]
   workflow_dispatch:
 
 env:
