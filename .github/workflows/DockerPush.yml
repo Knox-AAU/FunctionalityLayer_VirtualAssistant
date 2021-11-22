@@ -51,15 +51,16 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       # Create GitHub tag
-      - name: Create tag
-        uses: actions/github-script@v3
+      - name: Get next version
+        uses: technote-space/get-next-version-action@v1
+      - uses: actions/github-script@0.4.0
         with:
-          github-token: ${{ github.token }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             github.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: "refs/tags/${process.env.NEXT_VERSION}",
+              ref: `refs/tags/${process.env.NEXT_VERSION}`,
               sha: context.sha
             })
 
