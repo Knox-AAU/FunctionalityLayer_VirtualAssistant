@@ -59,7 +59,7 @@ jobs:
             github.git.createRef({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              ref: "refs/tags/tagname",
+              ref: "refs/tags/${process.env.NEXT_VERSION}",
               sha: context.sha
             })
 
