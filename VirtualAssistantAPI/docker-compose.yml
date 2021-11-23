@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  virtualassistantapi:
-    image: ${DOCKER_REGISTRY-}virtualassistantapi
-    build:
-      context: .
-      dockerfile: VirtualAssistantAPI/Dockerfile
