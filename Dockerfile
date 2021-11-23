@@ -1,23 +1,22 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
+FROM mcr.microsoft.com/dotnet/sdk:5.0  AS build-env
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
-WORKDIR /src
-COPY ["VirtualAssistantAPI/VirtualAssistantAPI/VirtualAssistantAPI.csproj", "VirtualAssistantAPI/"]
-COPY ["VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic.csproj", "../VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/"]
-RUN dotnet restore "VirtualAssistantAPI/VirtualAssistantAPI.csproj"
-COPY . .
-WORKDIR "/src/VirtualAssistantAPI"
-RUN dotnet build "VirtualAssistantAPI.csproj" -c Release -o /app/build
+# Copy csproj and restore as distinct layers
+COPY VirtualAssistantAPI/VirtualAssistantAPI/VirtualAssistantAPI.csproj ./VirtualAssistantAPI/VirtualAssistantAPI/
+COPY VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic.csproj ./VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/
+RUN dotnet restore ./VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic.csproj
+RUN dotnet restore ./VirtualAssistantAPI/VirtualAssistantAPI/VirtualAssistantAPI.csproj
 
-FROM build AS publish
-RUN dotnet publish "VirtualAssistantAPI.csproj" -c Release -o /app/publish
 
-FROM base AS final
+# Copy everything else and build
+COPY . ./
+RUN dotnet publish ./VirtualAssistantAPI/VirtualAssistantAPI/VirtualAssistantAPI.csproj -c Release -o out
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build-env /app/out .
+
+EXPOSE 80 
+
 ENTRYPOINT ["dotnet", "VirtualAssistantAPI.dll"]
