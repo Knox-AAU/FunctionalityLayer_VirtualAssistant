@@ -43,7 +43,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
                     }
                     else
                     {
-                        string sanitizedKey = FindAndAddKey(results, id, key);
+                        string sanitizedKey = SanitizeAndAddKey(results, id, key);
                         AddValueToKey(results, xmlReader, id, sanitizedKey);
                     }
                 }
@@ -51,15 +51,15 @@ namespace VirtualAssistantBusinessLogic.SparQL
             return results;
         }
         /// <summary>
-        /// Finds the key from the XML parsing and checks whether the key already exists.
-        /// If it does not exist, it is added to results array
-        /// Either way we return the found key
+        /// sanitizes the key from the XML parsing and checks whether the key already exists.
+        /// If it does not exist, it is added to results
+        /// Either way we return the sanitized key
         /// </summary>
         /// <param name="results">the results dict to add keys to</param>
         /// <param name="id"> id found from previous step</param>
         /// <param name="key"> unsanitized key with label</param>
         /// <returns>key with label part removed</returns>
-        private static string FindAndAddKey(Dictionary<string, Dictionary<string, List<string>>> results, string id, string key)
+        private static string SanitizeAndAddKey(Dictionary<string, Dictionary<string, List<string>>> results, string id, string key)
         {
             if (id == "_" && !results.ContainsKey(id))
             {
