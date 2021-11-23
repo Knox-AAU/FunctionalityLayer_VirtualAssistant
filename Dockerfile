@@ -6,6 +6,7 @@ WORKDIR /app
 COPY VirtualAssistantAPI/VirtualAssistantAPI/VirtualAssistantAPI.csproj ./VirtualAssistantAPI/VirtualAssistantAPI/
 COPY VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic.csproj ./VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/ 
 
+# Restore metadata and dependencies
 RUN dotnet restore ./VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic.csproj  &&\
  dotnet restore ./VirtualAssistantAPI/VirtualAssistantAPI/VirtualAssistantAPI.csproj
 
