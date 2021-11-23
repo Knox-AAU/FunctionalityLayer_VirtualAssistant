@@ -4,8 +4,8 @@ WORKDIR /app
 # Copy csproj and restore as distinct layers
 COPY VirtualAssistantAPI/VirtualAssistantAPI/VirtualAssistantAPI.csproj ./VirtualAssistantAPI/VirtualAssistantAPI/
 COPY VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic.csproj ./VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/
-RUN dotnet restore ./VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic.csproj
-RUN dotnet restore ./VirtualAssistantAPI/VirtualAssistantAPI/VirtualAssistantAPI.csproj
+RUN dotnet restore ./VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic.csproj  &&\
+ dotnet restore ./VirtualAssistantAPI/VirtualAssistantAPI/VirtualAssistantAPI.csproj
 
 
 # Copy everything else and build
