@@ -7,7 +7,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["VirtualAssistantAPI/VirtualAssistantAPI.csproj", "VirtualAssistantAPI/"]
+COPY ["../VirtualAssistantAPI/VirtualAssistantAPI/VirtualAssistantAPI.csproj", "VirtualAssistantAPI/"]
 COPY ["../VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic.csproj", "../VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/"]
 RUN dotnet restore "VirtualAssistantAPI/VirtualAssistantAPI.csproj"
 COPY . .

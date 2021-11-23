@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualAssistantAPI", "Virt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualAssistantBusinessLogic", "..\VirtualAssistantBusinessLogic\VirtualAssistantBusinessLogic\VirtualAssistantBusinessLogic.csproj", "{38795CDF-39C9-4F8E-92B0-3BDAAD9C7417}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualAssistantAPITests", "VitualAssistantAPITests\VirtualAssistantAPITests.csproj", "{4DFD06A3-8AEC-4141-8345-BC5206127239}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualAssistantAPITests", "VitualAssistantAPITests\VirtualAssistantAPITests.csproj", "{4DFD06A3-8AEC-4141-8345-BC5206127239}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualAssistantBusinessLogicTests", "VirtualAssistantBusinessLogicTests\VirtualAssistantBusinessLogicTests.csproj", "{7F8CD3FC-4BBE-4317-89BF-B9D37DA68381}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualAssistantBusinessLogicTests", "VirtualAssistantBusinessLogicTests\VirtualAssistantBusinessLogicTests.csproj", "{7F8CD3FC-4BBE-4317-89BF-B9D37DA68381}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B824A47C-0FD8-4BA2-A800-AE0292774BF5}"
 EndProject
