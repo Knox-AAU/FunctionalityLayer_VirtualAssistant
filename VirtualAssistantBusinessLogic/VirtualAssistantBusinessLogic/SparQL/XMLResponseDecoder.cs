@@ -51,7 +51,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
             return results;
         }
         /// <summary>
-        /// sanitizes the key from the XML parsing and checks whether the key already exists.
+        /// Sanitizes the key from the XML parsing and checks whether the key already exists.
         /// If it does not exist, it is added to results
         /// Either way we return the sanitized key
         /// </summary>
