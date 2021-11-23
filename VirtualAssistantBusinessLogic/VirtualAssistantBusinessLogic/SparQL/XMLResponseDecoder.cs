@@ -94,7 +94,11 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 results[id][key].Add(value);
             }
         }
-
+        /// <summary>
+        /// Finds id for the sparql entity
+        /// </summary>
+        /// <param name="xmlReader"></param>
+        /// <returns>The id extracted from the xmlReader</returns>
         private static string FindId(XmlReader xmlReader)
         {
             string id;
