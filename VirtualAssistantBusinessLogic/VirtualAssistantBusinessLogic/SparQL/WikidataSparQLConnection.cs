@@ -61,13 +61,13 @@ namespace VirtualAssistantBusinessLogic.SparQL
         public virtual SparQLBuilder GetSparQLBuilder(string type)
         {
             ISPOEncoder spoEncoder = new WikidataSPOEncoder();
-            switch (type.ToLower())
+            return type.ToLower() switch
             {
-                case "": return new UnknownSparQLBuilder(spoEncoder);
-                case "human": return new PersonSparQLBuilder(spoEncoder);
-                case "country": return new CountrySparQLBuilder(spoEncoder);
-                default: throw new ArgumentException($"{type} has no SparQLBuilder associated.");
-            }
+                "" => new UnknownSparQLBuilder(spoEncoder),
+                "human" => new PersonSparQLBuilder(spoEncoder),
+                "country" => new CountrySparQLBuilder(spoEncoder),
+                _ => throw new ArgumentException($"{type} has no SparQLBuilder associated."),
+            };
         }
     }
 }

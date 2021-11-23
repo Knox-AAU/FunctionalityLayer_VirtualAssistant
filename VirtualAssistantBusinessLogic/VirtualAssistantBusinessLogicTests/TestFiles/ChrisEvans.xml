@@ -1,0 +1,717 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sparql xmlns='http://www.w3.org/2005/sparql-results#'>
+	<head>
+		<variable name='s0'/>
+		<variable name='TypeLabel'/>
+		<variable name='OccupationLabel'/>
+		<variable name='birth_nameLabel'/>
+		<variable name='date_of_birthLabel'/>
+		<variable name='SpouseLabel'/>
+	</head>
+	<results>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q2964710</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='SpouseLabel'>
+				<literal xml:lang='en'>Billie Piper</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q2964710</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='SpouseLabel'>
+				<literal xml:lang='en'>Carol McGiffin</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q2964710</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='SpouseLabel'>
+				<literal xml:lang='en'>Natasha Shishmanian</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='birth_nameLabel'>
+				<literal>Christopher Robert Evans</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='birth_nameLabel'>
+				<literal>Christopher Robert Evans</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q2964709</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='birth_nameLabel'>
+				<literal>Christian Voron</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q2964710</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='birth_nameLabel'>
+				<literal>Christopher James Evans</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='date_of_birthLabel'>
+				<literal>1981-06-13T00:00:00Z</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='date_of_birthLabel'>
+				<literal>1981-06-13T00:00:00Z</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q303577</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='date_of_birthLabel'>
+				<literal>1977-07-07T00:00:00Z</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q303577</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='date_of_birthLabel'>
+				<literal>1977-07-07T00:00:00Z</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q466583</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='date_of_birthLabel'>
+				<literal>1958-05-14T00:00:00Z</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q2964709</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='date_of_birthLabel'>
+				<literal>1956-02-08T00:00:00Z</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q2964710</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='date_of_birthLabel'>
+				<literal>1966-04-01T00:00:00Z</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q5106512</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='date_of_birthLabel'>
+				<literal>1946-09-14T00:00:00Z</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q5106513</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='date_of_birthLabel'>
+				<literal>1962-10-13T00:00:00Z</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q5112723</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='date_of_birthLabel'>
+				<literal>1954-01-01T00:00:00Z</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q17490263</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='date_of_birthLabel'>
+				<literal>1991-01-29T00:00:00Z</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q21538587</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='date_of_birthLabel'>
+				<literal>1967-01-01T00:00:00Z</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q27918241</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='date_of_birthLabel'>
+				<literal>1997-10-05T00:00:00Z</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q61959516</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='date_of_birthLabel'>
+				<literal>1969-01-01T00:00:00Z</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q108329853</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='date_of_birthLabel'>
+				<literal>1961-03-11T00:00:00Z</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>actor</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>actor</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>voice actor</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>voice actor</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>film director</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>film director</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>film producer</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>film producer</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>model</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>model</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>television actor</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>television actor</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>film actor</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q178348</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>film actor</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q303577</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>politician</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q303577</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>politician</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q466583</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>politician</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q2964709</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>singer</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q2964710</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>businessperson</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q2964710</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>disc jockey</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q2964710</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>entrepreneur</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q2964710</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>merchant</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q2964710</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>television producer</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q2964710</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>television presenter</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q2964710</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>radio personality</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q5106512</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>ice hockey player</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q5106513</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>association football manager</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q5106513</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>association football player</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q5112723</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>painter</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q5392352</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>animator</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q17490263</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>basketball player</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q21538587</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>painter</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q21538587</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>visual artist</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q27918241</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>American football player</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q51990270</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>researcher</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q57469252</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>businessperson</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q57469252</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>antiquarian seller</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q61959516</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>journalist</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q63250333</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>researcher</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q100981991</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>basketball player</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q100981992</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>basketball player</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='s0'>
+				<uri>http://www.wikidata.org/entity/Q108329853</uri>
+			</binding>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>historian</literal>
+			</binding>
+		</result>
+	</results>
+</sparql>

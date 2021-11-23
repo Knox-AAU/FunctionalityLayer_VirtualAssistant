@@ -74,13 +74,13 @@ namespace VirtualAssistantBusinessLogic.SparQL
         /// <returns></returns>
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             sb.Append("SELECT ");
             if (FromSubject != null)
             {
                 sb.Append(FromSubject.Name);
             }
-            sb.Append(" ");
+            sb.Append(' ');
             foreach (string value in Selects)
             {
                 sb.Append($"?{value}Label ");

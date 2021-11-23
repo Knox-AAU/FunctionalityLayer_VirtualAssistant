@@ -31,7 +31,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 {
                     //Read the bindings name (the variable from the select for this binding)
                     string key = xmlReader.GetAttribute("name");
-                    if (!key.Contains("Label"))//We use the wikidata label service, except for the identifying variable
+                    if (!key.Contains("Label")) //We use the wikidata label service, except for the identifying variable
                     {
                         id = FindId(xmlReader);
                         //If the id is new
@@ -51,13 +51,13 @@ namespace VirtualAssistantBusinessLogic.SparQL
             return results;
         }
         /// <summary>
-        /// Sanitizes the key from the XML parsing and checks whether the key already exists.
+        /// sanitizes the key from the XML parsing and checks whether the key already exists.
         /// If it does not exist, it is added to results
         /// Either way we return the sanitized key
         /// </summary>
         /// <param name="results">the results dict to add keys to</param>
-        /// <param name="id">id found from previous step</param>
-        /// <param name="key">unsanitized key with label</param>
+        /// <param name="id"> id found from previous step</param>
+        /// <param name="key"> unsanitized key with label</param>
         /// <returns>key with label part removed</returns>
         private static string SanitizeAndAddKey(Dictionary<string, Dictionary<string, List<string>>> results, string id, string key)
         {
