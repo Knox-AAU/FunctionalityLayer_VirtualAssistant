@@ -29,7 +29,7 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
             // Get the types from the node that are supported by the connection
             IEnumerable<string> supportedTypesInNode = sparqlConnection.SupportedTypes.Intersect(node.Information["Type"]);
             // If the connection does not support any of the node's types return the node as it is
-            if (supportedTypesInNode.Count() == 0)
+            if (!supportedTypesInNode.Any())
             {
                 return node;
             }
@@ -63,13 +63,15 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
             Dictionary<string, Dictionary<string, List<string>>> results = sparqlConnection.ExecuteQuery(sparqlQuery);
 
             //Create the node list that is returned
-            List<KnowledgeGraphNode> nodeList = new List<KnowledgeGraphNode>();
+            List<KnowledgeGraphNode> nodeList = new();
             //Go through each key-value pair (kvp) from the executed query and create and append the nodes to the node list
             foreach (var kvp in results)
             {
-                KnowledgeGraphNode node = new KnowledgeGraphNode();
-                node.Id = kvp.Key;
-                node.Information = kvp.Value;
+                KnowledgeGraphNode node = new()
+                {
+                    Id = kvp.Key,
+                    Information = kvp.Value
+                };
 
                 nodeList.Add(node);
             }

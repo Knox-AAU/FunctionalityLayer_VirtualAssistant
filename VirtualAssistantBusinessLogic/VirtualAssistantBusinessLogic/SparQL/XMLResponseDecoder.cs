@@ -33,16 +33,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
                     string key = xmlReader.GetAttribute("name");
                     if (!key.Contains("Label"))//We use the wikidata label service, except for the identifying variable
                     {
-                        Regex filter = new Regex(@"(Q[0-9]+)");//Entities have a .../entity/Q... uri
-                        var match = filter.Match(xmlReader.ReadInnerXml());
-                        if (match.Success)
-                        {
-                            id = "wd:" + match.Value;//TODO check if wd is always the case or if some needs another prefix based on the uri
-                        }
-                        else
-                        {
-                            id = "_";//If the id can't be found, collect it in this id
-                        }
+                        id = FindId(xmlReader);
                         //If the id is new
                         if (!results.ContainsKey(id))
                         {
@@ -52,30 +43,76 @@ namespace VirtualAssistantBusinessLogic.SparQL
                     }
                     else
                     {
-                        if (id == "_" && !results.ContainsKey(id))
-                        {
-                            results[id] = new Dictionary<string, List<string>>();
-                        }
-                        //Remove Label from key
-                        key = key.Substring(0, key.Length - "Label".Length);
-                        //If the key is new
-                        if (!results[id].ContainsKey(key))
-                        {
-                            results[id][key] = new List<string>();
-                        }
-                        //The bindings have a literal subelement
-                        xmlReader.ReadToDescendant("literal");
-                        //Read the literal value for the key
-                        string value = xmlReader.ReadElementContentAsString();
-                        //If not already added (distinct)
-                        if (!results[id][key].Contains(value))
-                        {
-                            results[id][key].Add(value);
-                        }
+                        string sanitizedKey = SanitizeAndAddKey(results, id, key);
+                        AddValueToKey(results, xmlReader, id, sanitizedKey);
                     }
                 }
             }
             return results;
+        }
+        /// <summary>
+        /// Sanitizes the key from the XML parsing and checks whether the key already exists.
+        /// If it does not exist, it is added to results
+        /// Either way we return the sanitized key
+        /// </summary>
+        /// <param name="results">the results dict to add keys to</param>
+        /// <param name="id">id found from previous step</param>
+        /// <param name="key">unsanitized key with label</param>
+        /// <returns>key with label part removed</returns>
+        private static string SanitizeAndAddKey(Dictionary<string, Dictionary<string, List<string>>> results, string id, string key)
+        {
+            if (id == "_" && !results.ContainsKey(id))
+            {
+                results[id] = new Dictionary<string, List<string>>();
+            }
+            //Remove Label from key
+            key = key.Substring(0, key.Length - "Label".Length);
+            //If the key is new
+            if (!results[id].ContainsKey(key))
+            {
+                results[id][key] = new List<string>();
+            }
+            return key;
+        }
+
+        /// <summary>
+        /// Finds the value to a key in a XML file.
+        /// </summary>
+        /// <param name="results"></param>
+        /// <param name="xmlReader"></param>
+        /// <param name="id"></param>
+        /// <param name="key"></param>
+        private static void AddValueToKey(Dictionary<string, Dictionary<string, List<string>>> results, XmlReader xmlReader, string id, string key)
+        {
+            //The bindings have a literal subelement
+            xmlReader.ReadToDescendant("literal");
+            //Read the literal value for the key
+            string value = xmlReader.ReadElementContentAsString();
+            //If not already added (distinct)
+            if (!results[id][key].Contains(value))
+            {
+                results[id][key].Add(value);
+            }
+        }
+        /// <summary>
+        /// Finds id for the sparql entity
+        /// </summary>
+        /// <param name="xmlReader"></param>
+        /// <returns>The id extracted from the xmlReader</returns>
+        private static string FindId(XmlReader xmlReader)
+        {
+            string id;
+            Regex filter = new(@"(Q[0-9]+)");//Entities have a .../entity/Q... uri
+            var match = filter.Match(xmlReader.ReadInnerXml());
+            if (match.Success)
+            {
+                id = "wd:" + match.Value;//TODO check if wd is always the case or if some needs another prefix based on the uri
+            }
+            else
+            {
+                id = "_";//If the id can't be found, collect it in this id
+            }
+            return id;
         }
     }
 }

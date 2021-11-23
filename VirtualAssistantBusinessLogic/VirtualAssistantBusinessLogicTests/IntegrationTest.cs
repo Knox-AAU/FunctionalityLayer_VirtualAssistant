@@ -11,7 +11,7 @@ namespace VirtualAssistantBusinessLogicTests
         public void Setup()
         {
         }
-
+        /*
         [Test]
         public void it_can_get_nodes_from_the_knowledge_graph_api()
         {
@@ -61,7 +61,6 @@ namespace VirtualAssistantBusinessLogicTests
             node.Information["Type"].Add("human");
             return node;
         }
-
         private KnowledgeGraphNode GetDenmarkKnowledgeGraphNode()
         {
             KnowledgeGraphNode node = new KnowledgeGraphNode();
@@ -77,5 +76,7 @@ namespace VirtualAssistantBusinessLogicTests
             node.Information["Type"].Add("autonomous country within the Kingdom of Denmark");
             return node;
         }
+        */
+
     }
 }
