@@ -56,8 +56,8 @@ namespace VirtualAssistantBusinessLogic.SparQL
         /// Either way we return the sanitized key
         /// </summary>
         /// <param name="results">the results dict to add keys to</param>
-        /// <param name="id"> id found from previous step</param>
-        /// <param name="key"> unsanitized key with label</param>
+        /// <param name="id">id found from previous step</param>
+        /// <param name="key">unsanitized key with label</param>
         /// <returns>key with label part removed</returns>
         private static string SanitizeAndAddKey(Dictionary<string, Dictionary<string, List<string>>> results, string id, string key)
         {
