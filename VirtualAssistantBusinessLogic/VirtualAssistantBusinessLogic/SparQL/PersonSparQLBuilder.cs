@@ -17,7 +17,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
         {
             string subject = Query;
 
-            SparQLSelect sparQLSelect = new SparQLSelect(SPOEncoder);
+            SparQLSelect sparQLSelect = new(SPOEncoder);
             //Return the SparQL string
             return sparQLSelect
                         .Select("Type", "Occupation", "birth_name", "date_of_birth", "Spouse")
