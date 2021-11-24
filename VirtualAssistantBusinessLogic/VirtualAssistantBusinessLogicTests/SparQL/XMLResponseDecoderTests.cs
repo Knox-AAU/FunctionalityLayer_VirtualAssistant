@@ -19,12 +19,12 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
 
         }
 
-        private XMLResponseDecoder CreateXMLResponseDecoder()
+        private static XMLResponseDecoder CreateXMLResponseDecoder()
         {
             return new XMLResponseDecoder();
         }
 
-        private FileStream CreateChrisEvansFileStream()
+        private static FileStream CreateChrisEvansFileStream()
         {
 
             return File.OpenRead("../../../TestFiles/ChrisEvans.xml");

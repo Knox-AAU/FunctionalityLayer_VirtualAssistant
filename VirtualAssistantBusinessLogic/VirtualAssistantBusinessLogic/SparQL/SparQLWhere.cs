@@ -23,13 +23,13 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 EncodedSPOs.Add(SparQLSelect.FromSubjectRaw, SparQLSelect.FromSubject);
             }
         }
-        private string SubjectString { get; set; } = "";
-        private string ObjectString { get; set; } = "";
-        private string PredicateString { get; set; } = "";
-        private List<string> Conditions { get; set; }
+        public string SubjectString { get; private set; } = "";
+        public string ObjectString { get; private set; } = "";
+        public string PredicateString { get; private set; } = "";
+        public List<string> Conditions { get; private set; }
         private const string labelServiceSparQL = "SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }";
         public SparQLSelect SparQLSelect;
-        private Dictionary<string, EncodedSPO> EncodedSPOs { get; set; }
+        public Dictionary<string, EncodedSPO> EncodedSPOs { get; private set; }
 
         /// <summary>
         /// Specifies the subject of the sparql triplet as being equal to the
@@ -194,7 +194,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 //The strings should all be empty or a partial triplet is in progress
                 throw new Exception("WHERE triplet is not done");
             }
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             //Since we use fluent we need to include the select's ToString as well
             sb.Append(SparQLSelect.ToString());
             //Start the WHERE
@@ -213,11 +213,11 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 }
                 sb.Append(" {");
                 sb.Append(str);
-                sb.Append("}");
+                sb.Append('}');
                 firstInUnion = false;
             }
             sb.Append(" " + labelServiceSparQL);
-            sb.Append("}");
+            sb.Append('}');
             return sb.ToString();
         }
     }
