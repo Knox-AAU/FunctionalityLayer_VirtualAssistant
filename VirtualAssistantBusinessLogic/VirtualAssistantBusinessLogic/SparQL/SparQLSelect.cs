@@ -17,7 +17,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
             Selects = new List<string>();
             SPOEncoder = spoEncoder;
         }
-        private List<string> Selects { get; set; }
+        public List<string> Selects { get; private set; }
         public EncodedSPO FromSubject { get; private set; }
         public string FromSubjectRaw { get; private set; }
         public ISPOEncoder SPOEncoder { get; set; }
@@ -60,7 +60,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
         {
             if (Selects.Count == 0)
             {
-                throw new Exception("Must select something.");//TODO maybe other type of exception
+                throw new CountZeroException("Must select something.");
             }
             return new SparQLWhere(this);
         }
