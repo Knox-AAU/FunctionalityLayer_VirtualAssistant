@@ -74,7 +74,7 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
             ExpectedResult["wd:Q108329853"].Add("date_of_birth", new() { "1961-03-11T00:00:00Z" });
 
             ExpectedResult["wd:Q21538587"].Add("Type", new() { "human" });
-            ExpectedResult["wd:Q2964710"].Add("Occupation", new() { "visual artist" });
+            ExpectedResult["wd:Q21538587"].Add("Occupation", new() { "painter", "visual artist" });
 
             ExpectedResult["wd:Q5392352"].Add("Type", new() { "human" });
             ExpectedResult["wd:Q5392352"].Add("Occupation", new() { "animator" });
@@ -87,8 +87,8 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
             {
                 foreach (var kvp in id.Value)
                 {
-                    Assert.Contains(kvp.Key, result[id.Key].Keys);
-                    Assert.Contains(kvp.Value, result[id.Key].Values);
+                    Assert.Contains(kvp.Key, result[id.Key].Keys); // All ID's exist in the dictionary
+                    Assert.Contains(kvp.Value, result[id.Key].Values); // All values exist in the dictionary
                 }
             }
         }
