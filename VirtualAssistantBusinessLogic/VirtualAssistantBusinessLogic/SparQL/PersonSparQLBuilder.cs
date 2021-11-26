@@ -23,11 +23,11 @@ namespace VirtualAssistantBusinessLogic.SparQL
                         .Select("Type", "Occupation", "birth_name", "date_of_birth", "Spouse")
                         .Where()
                             .EncodePredicates("Type", "Occupation", "birth name", "date of birth", "Spouse")
-                            .SubjectIs(subject).PredicateIs("Type").ObjectIs("Type")
-                            .SubjectIs(subject).PredicateIs("Occupation").ObjectIs("Occupation")
-                            .SubjectIs(subject).PredicateIs("birth name").ObjectIs("birth_name")
-                            .SubjectIs(subject).PredicateIs("date of birth").ObjectIs("date_of_birth")
-                            .SubjectIs(subject).PredicateIs("Spouse").ObjectIs("Spouse")
+                            .SubjectIs(subject).PredicateIs("Type").GetObjectIn("Type")
+                            .SubjectIs(subject).PredicateIs("Occupation").GetObjectIn("Occupation")
+                            .SubjectIs(subject).PredicateIs("birth name").GetObjectIn("birth_name")
+                            .SubjectIs(subject).PredicateIs("date of birth").GetObjectIn("date_of_birth")
+                            .SubjectIs(subject).PredicateIs("Spouse").GetObjectIn("Spouse")
                         .ToString();
         }
     }

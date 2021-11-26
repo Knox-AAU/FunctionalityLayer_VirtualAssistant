@@ -103,7 +103,7 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
 
 
             // Act
-            _ = sparQLWhere.ObjectIs(
+            _ = sparQLWhere.GetObjectIn(
                 obj);
 
             // Assert

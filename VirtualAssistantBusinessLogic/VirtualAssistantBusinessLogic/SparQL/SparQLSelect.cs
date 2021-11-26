@@ -60,7 +60,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
         {
             if (Selects.Count == 0)
             {
-                throw new CountZeroException("Must select something.");
+                throw new ArgumentOutOfRangeException("Must select something.");
             }
             return new SparQLWhere(this);
         }

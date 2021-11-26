@@ -36,7 +36,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
         /// input subject.
         /// </summary>
         /// <param name="subject">Subject of the sparql triplet</param>
-        /// <returns>this</returns>
+        /// <returns>SparQLWhere object</returns>
         public SparQLWhere SubjectIs(string subject)
         {
             if (SubjectString != "") throw new ArgumentException("Subject in query has already been set. Finish current condition first");
@@ -59,7 +59,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
         /// input parameter.
         /// </summary>
         /// <param name="predicate">Predicate of the sparql triplet</param>
-        /// <returns>this</returns>
+        /// <returns>SparQLWhere object</returns>
         public SparQLWhere PredicateIs(string predicate)
         {
             if (PredicateString != "") throw new ArgumentException("Predicate in query has already been set. Finish current condition first");
@@ -81,8 +81,8 @@ namespace VirtualAssistantBusinessLogic.SparQL
         /// Specifies the name of the variable
         /// </summary>
         /// <param name="obj">name of the object variable</param>
-        /// <returns>this</returns>
-        public SparQLWhere ObjectIs(string obj)
+        /// <returns>SparQLWhere object</returns>
+        public SparQLWhere GetObjectIn(string obj)
         {
             if (ObjectString != "") throw new ArgumentException("Object in query has already been set. Finish current condition first");
 

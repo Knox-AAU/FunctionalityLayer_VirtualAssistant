@@ -50,6 +50,6 @@ jobs:
         uses: github/super-linter@v4
         env:
           VALIDATE_ALL_CODEBASE: false
-          VALIDATE_JSCPD: false
+          VALIDATE_JSCPD: false # Don't check for copy-paste (since we have a test XML file)
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

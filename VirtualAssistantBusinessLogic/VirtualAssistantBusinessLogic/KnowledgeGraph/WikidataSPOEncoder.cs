@@ -41,7 +41,7 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
                 "official language" => new EncodedSPO("", "p:P37/ps:P37"),
                 "capital" => new EncodedSPO("", "p:P36/ps:P36"),
                 "population" => new EncodedSPO("", "p:P1082/ps:P1082"),
-                _ => new EncodedSPO("", "wdt:P31"),
+                _ => new EncodedSPO("", "wdt:P31"), //wdt:P31 means instance of 
             };
         }
 

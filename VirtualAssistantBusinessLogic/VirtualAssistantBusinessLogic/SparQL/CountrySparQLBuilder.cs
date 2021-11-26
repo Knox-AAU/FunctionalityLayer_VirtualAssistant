@@ -24,11 +24,11 @@ namespace VirtualAssistantBusinessLogic.SparQL
                         .Select("Type", "Continent", "Official_language", "Capital", "Population")
                         .Where()
                             .EncodePredicates("Type", "Continent", "Official language", "Capital", "Population")
-                            .SubjectIs(subject).PredicateIs("Type").ObjectIs("Type")
-                            .SubjectIs(subject).PredicateIs("Continent").ObjectIs("Continent")
-                            .SubjectIs(subject).PredicateIs("Official language").ObjectIs("Official_language")
-                            .SubjectIs(subject).PredicateIs("Capital").ObjectIs("Capital")
-                            .SubjectIs(subject).PredicateIs("Population").ObjectIs("Population")
+                            .SubjectIs(subject).PredicateIs("Type").GetObjectIn("Type")
+                            .SubjectIs(subject).PredicateIs("Continent").GetObjectIn("Continent")
+                            .SubjectIs(subject).PredicateIs("Official language").GetObjectIn("Official_language")
+                            .SubjectIs(subject).PredicateIs("Capital").GetObjectIn("Capital")
+                            .SubjectIs(subject).PredicateIs("Population").GetObjectIn("Population")
                         .ToString();
         }
     }

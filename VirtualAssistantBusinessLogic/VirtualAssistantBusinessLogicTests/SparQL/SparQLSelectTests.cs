@@ -65,13 +65,13 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
         }
 
         [Test]
-        public void Where_SelectsAreZero_ThrowsCountZeroException()
+        public void Where_SelectsAreZero_ThrowsException()
         {
             // Arrange
             var sparQLSelect = this.CreateSparQLSelect();
 
             // Act // Assert
-            Assert.Throws<CountZeroException>(() => sparQLSelect.Where());
+            Assert.Throws<ArgumentOutOfRangeException>(() => sparQLSelect.Where());
         }
 
         [Test]
