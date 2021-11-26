@@ -2,7 +2,7 @@ name: BusinessLogic .NET Test
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, SetupCIWorkFlow ]
   pull_request:
     branches: [ main ]
 
