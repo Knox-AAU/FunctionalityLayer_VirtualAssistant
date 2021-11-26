@@ -62,7 +62,7 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
                 );
         }
 
-        [Test] 
+        [Test]
         public void PredicateIs_HasEncodedSPO_PredicateStringCorrect()
         {
             // Arrange
@@ -79,7 +79,7 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
             Assert.AreEqual("NAME", sparQLWhere.PredicateString);
         }
 
-        [Test] 
+        [Test]
         public void PredicateIs_NoEncodedSPO_PredicateStringCorrect()
         {
             // Arrange

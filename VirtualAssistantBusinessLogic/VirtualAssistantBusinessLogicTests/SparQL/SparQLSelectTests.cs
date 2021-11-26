@@ -52,12 +52,13 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
             }
 
             // Act
-            foreach(string s in input){
+            foreach (string s in input)
+            {
                 sparQLSelect.Select(s);
             }
 
             // Assert
-            foreach(string s in input)
+            foreach (string s in input)
             {
                 Assert.Contains(s, sparQLSelect.Selects);
             }
@@ -89,7 +90,7 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
         public void ToString_StateUnderTest_ExpectedBehavior()
         {
             // Arrange
-            var sparQLSelect = this.CreateSparQLSelect();
+            SparQLSelect sparQLSelect = this.CreateSparQLSelect();
             EncodedSPO output = new ($"?s1 ?p \"SUBJECT\"@en . ", $"?s1");
             sparQLSelect.SPOEncoder
                 .EncodeSubject(Arg.Any<string>())
