@@ -20,7 +20,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
             SparQLSelect sparQLSelect = new(SPOEncoder);
 
             //Return the SparQL string
-            return sparQLSelect //TODO: make function for this
+            return sparQLSelect
                         .Select("Type", "Continent", "Official_language", "Capital", "Population")
                         .Where()
                             .EncodePredicates("Type", "Continent", "Official language", "Capital", "Population")
