@@ -36,7 +36,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
                         .Select("Type")
                         .Where()
                             .EncodePredicates("Type")
-                            .SubjectIs(subject).PredicateIs("Type").ObjectAs("Type")
+                            .SubjectIs(subject).PredicateIs("Type").ObjectIs("Type")
                         .ToString();
         }
     }

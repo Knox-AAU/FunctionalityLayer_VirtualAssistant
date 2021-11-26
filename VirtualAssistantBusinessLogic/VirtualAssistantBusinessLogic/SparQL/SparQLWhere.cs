@@ -36,18 +36,18 @@ namespace VirtualAssistantBusinessLogic.SparQL
         /// input subject.
         /// </summary>
         /// <param name="subject">Subject of the sparql triplet</param>
-        /// <returns></returns>
+        /// <returns>this</returns>
         public SparQLWhere SubjectIs(string subject)
         {
-            if (EncodedSPOs.ContainsKey(subject))
+            if (SubjectString != "") throw new ArgumentException("Subject in query has already been set. Finish current condition first");
+
+            if (!EncodedSPOs.ContainsKey(subject))
             {
-                SubjectString = EncodedSPOs[subject].Name;
+                throw new KeyNotFoundException("Encoded SPO does not include the subject key");
             }
-            else
-            {
-                SubjectString = subject;
-            }
-            if (TripletIsDone())
+
+            SubjectString = EncodedSPOs[subject].Name;
+            if (IsTripletDone())
             {
                 AddCondition();
             }
@@ -59,64 +59,18 @@ namespace VirtualAssistantBusinessLogic.SparQL
         /// input parameter.
         /// </summary>
         /// <param name="predicate">Predicate of the sparql triplet</param>
-        /// <returns></returns>
+        /// <returns>this</returns>
         public SparQLWhere PredicateIs(string predicate)
         {
-            if (EncodedSPOs.ContainsKey(predicate))
-            {
-                PredicateString = EncodedSPOs[predicate].Name;
-            }
-            else
-            {
-                PredicateString = predicate;
-            }
-            if (TripletIsDone())
-            {
-                AddCondition();
-            }
-            return this;
-        }
+            if (PredicateString != "") throw new ArgumentException("Predicate in query has already been set. Finish current condition first");
 
-        /// <summary>
-        /// Specifies the object of the sparql triplet as being equal to the
-        /// input parameter.
-        /// </summary>
-        /// <param name="obj">Object of the sparql triplet</param>
-        /// <returns></returns>
-        public SparQLWhere ObjectIs(string obj)
-        {
-            ObjectString = obj;
-            if (TripletIsDone())
+            if (!EncodedSPOs.ContainsKey(predicate))
             {
-                AddCondition();
+                throw new KeyNotFoundException("Encoded SPO does not include the predicate key");
             }
-            return this;
-        }
 
-        /// <summary>
-        /// Specifies the name of the variable
-        /// </summary>
-        /// <param name="subject">name of the subject variable</param>
-        /// <returns></returns>
-        public SparQLWhere SubjectAs(string subject)
-        {
-            SubjectString = $"?{subject}";
-            if (TripletIsDone())
-            {
-                AddCondition();
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the name of the variable
-        /// </summary>
-        /// <param name="predicate">name of the predicate variable</param>
-        /// <returns></returns>
-        public SparQLWhere PredicateAs(string predicate)
-        {
-            PredicateString = $"?{predicate}";
-            if (TripletIsDone())
+            PredicateString = EncodedSPOs[predicate].Name;
+            if (IsTripletDone())
             {
                 AddCondition();
             }
@@ -127,11 +81,13 @@ namespace VirtualAssistantBusinessLogic.SparQL
         /// Specifies the name of the variable
         /// </summary>
         /// <param name="obj">name of the object variable</param>
-        /// <returns></returns>
-        public SparQLWhere ObjectAs(string obj)
+        /// <returns>this</returns>
+        public SparQLWhere ObjectIs(string obj)
         {
+            if (ObjectString != "") throw new ArgumentException("Object in query has already been set. Finish current condition first");
+
             ObjectString = $"?{obj}";
-            if (TripletIsDone())
+            if (IsTripletDone())
             {
                 AddCondition();
             }
@@ -141,8 +97,8 @@ namespace VirtualAssistantBusinessLogic.SparQL
         /// <summary>
         /// Checks wether the subject, predicate, and the object all have a value
         /// </summary>
-        /// <returns></returns>
-        private bool TripletIsDone()
+        /// <returns>whether triplet is done</returns>
+        private bool IsTripletDone()
         {
             if (SubjectString != "" && PredicateString != "" && ObjectString != "")
             {
