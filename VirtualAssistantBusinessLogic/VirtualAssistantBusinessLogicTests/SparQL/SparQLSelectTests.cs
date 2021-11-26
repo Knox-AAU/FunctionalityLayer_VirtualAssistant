@@ -29,14 +29,14 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
         {
             // Arrange
             var sparQLSelect = this.CreateSparQLSelect();
-            string[] input = { "test" };
+            string input = "test";
 
 
             // Act
             _ = sparQLSelect.Select(input);
 
             // Assert
-            Assert.Contains(input[0], sparQLSelect.Selects);
+            Assert.Contains(input, sparQLSelect.Selects);
         }
 
         [Test]
@@ -87,7 +87,7 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
         }
 
         [Test]
-        public void ToString_StateUnderTest_ExpectedBehavior()
+        public void ToString_SparQLSelectWithValues_CorrectStringReturned()
         {
             // Arrange
             SparQLSelect sparQLSelect = this.CreateSparQLSelect();
