@@ -49,7 +49,11 @@ namespace VirtualAssistantAPI.Controllers
             }
             KnowledgeGraph graph = new KnowledgeGraph(new SparQLConnectionFactory());
             var nodes = graph.FindNodes(name);
-            var node = graph.FindNodeInformation(nodes.FirstOrDefault());
+            if (nodes == null || nodes.Count() == 0)
+            {
+                return null;
+            }
+            var node = graph.FindNodeInformation(nodes.First());
             return new JsonResult(node);
         }
     }
