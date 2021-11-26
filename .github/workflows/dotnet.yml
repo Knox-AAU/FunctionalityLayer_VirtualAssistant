@@ -1,10 +1,10 @@
-name: .NET
+name: BusinessLogic .NET Test
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build:
@@ -16,10 +16,10 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
-    - name: Restore businessLogic
-      run: dotnet restore VirtualAssistantBusinessLogic/
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore VirtualAssistantBusinessLogic
     - name: Build
-      run: dotnet build VirtualAssistantBusinessLogic/ --no-restore
+      run: dotnet build --no-restore VirtualAssistantBusinessLogic
     - name: Test
-      run: dotnet test VirtualAssistantBusinessLogic/ --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal VirtualAssistantBusinessLogic
