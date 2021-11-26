@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore businessLogic
-      run: dotnet restore ../VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic.csproj
+      run: dotnet restore ./VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic.csproj
     - name: Build
-      run: dotnet build ../VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic.csproj --no-restore
+      run: dotnet build ./VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic.csproj --no-restore
     - name: Test
-      run: dotnet test ../VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic.csproj --no-build --verbosity normal
+      run: dotnet test ./VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic/VirtualAssistantBusinessLogic.csproj --no-build --verbosity normal
