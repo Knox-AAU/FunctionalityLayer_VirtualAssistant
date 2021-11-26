@@ -91,7 +91,7 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
         {
             // Arrange
             SparQLSelect sparQLSelect = this.CreateSparQLSelect();
-            EncodedSPO output = new ($"?s1 ?p \"SUBJECT\"@en . ", $"?s1");
+            EncodedSPO output = new($"?s1 ?p \"SUBJECT\"@en . ", $"?s1");
             sparQLSelect.SPOEncoder
                 .EncodeSubject(Arg.Any<string>())
                 .Returns(output);
