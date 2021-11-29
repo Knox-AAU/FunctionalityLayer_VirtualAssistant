@@ -19,4 +19,8 @@
     <ProjectReference Include="..\VirtualAssistantBusinessLogic\VirtualAssistantBusinessLogic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TestFiles\" />
+  </ItemGroup>
+
 </Project>

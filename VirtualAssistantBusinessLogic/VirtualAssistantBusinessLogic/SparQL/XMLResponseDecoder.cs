@@ -31,7 +31,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 {
                     //Read the bindings name (the variable from the select for this binding)
                     string key = xmlReader.GetAttribute("name");
-                    if (!key.Contains("Label"))//We use the wikidata label service, except for the identifying variable
+                    if (!key.Contains("Label")) //We use the wikidata label service, except for the identifying variable
                     {
                         id = FindId(xmlReader);
                         //If the id is new
