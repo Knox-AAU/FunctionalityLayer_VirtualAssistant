@@ -42,7 +42,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
             if (SubjectString != "") throw new ArgumentException("Subject in query has already been set. Finish current condition first");
 
             // Subject can either be encoded (if ID is unknown) or an ID
-            SubjectString = EncodedSPOs.ContainsKey(subject) ? EncodedSPOs[subject].Name : subject; 
+            SubjectString = EncodedSPOs.ContainsKey(subject) ? EncodedSPOs[subject].Name : subject;
 
             if (IsTripletDone())
             {
