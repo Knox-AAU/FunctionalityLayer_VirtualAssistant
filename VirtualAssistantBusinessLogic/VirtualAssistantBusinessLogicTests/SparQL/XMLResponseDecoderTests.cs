@@ -58,29 +58,34 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
         public void Decode_ChrisEvansStreamIsGiven_KeysAndValuesAreAdded()
         {
             // Arrange
-            XMLResponseDecoder xMLResponseDecoder = CreateXMLResponseDecoder();
+            XMLResponseDecoder xmlResponseDecoder = CreateXMLResponseDecoder();
             Stream stream = CreateChrisEvansFileStream();
 
             Dictionary<string, Dictionary<string, List<string>>> ExpectedResult = new();
-            ExpectedResult.Add("wd:Q2964710", new());
-            ExpectedResult.Add("wd:Q108329853", new());
-            ExpectedResult.Add("wd:Q21538587", new());
-            ExpectedResult.Add("wd:Q5392352", new());
+            string person1 = "wd:Q2964710",
+                   person2 = "wd:Q108329853",
+                   person3 = "wd:Q21538587",
+                   person4 = "wd:Q5392352";
 
-            ExpectedResult["wd:Q2964710"].Add("Type", new() { "human" });
-            ExpectedResult["wd:Q2964710"].Add("Spouse", new() { "Billie Piper", "Carol McGiffin", "Natasha Shishmanian" });
+            ExpectedResult.Add(person1, new());
+            ExpectedResult.Add(person2, new());
+            ExpectedResult.Add(person3, new());
+            ExpectedResult.Add(person4, new());
 
-            ExpectedResult["wd:Q108329853"].Add("Type", new() { "human" });
-            ExpectedResult["wd:Q108329853"].Add("date_of_birth", new() { "1961-03-11T00:00:00Z" });
+            ExpectedResult[person1].Add("Type", new() { "human" });
+            ExpectedResult[person1].Add("Spouse", new() { "Billie Piper", "Carol McGiffin", "Natasha Shishmanian" });
 
-            ExpectedResult["wd:Q21538587"].Add("Type", new() { "human" });
-            ExpectedResult["wd:Q21538587"].Add("Occupation", new() { "painter", "visual artist" });
+            ExpectedResult[person2].Add("Type", new() { "human" });
+            ExpectedResult[person2].Add("date_of_birth", new() { "1961-03-11T00:00:00Z" });
 
-            ExpectedResult["wd:Q5392352"].Add("Type", new() { "human" });
-            ExpectedResult["wd:Q5392352"].Add("Occupation", new() { "animator" });
+            ExpectedResult[person3].Add("Type", new() { "human" });
+            ExpectedResult[person3].Add("Occupation", new() { "painter", "visual artist" });
+
+            ExpectedResult[person4].Add("Type", new() { "human" });
+            ExpectedResult[person4].Add("Occupation", new() { "animator" });
 
             // Act
-            Dictionary<string, Dictionary<string, List<string>>> result = xMLResponseDecoder.Decode(stream);
+            Dictionary<string, Dictionary<string, List<string>>> result = xmlResponseDecoder.Decode(stream);
 
             // Assert
             foreach (var id in ExpectedResult)

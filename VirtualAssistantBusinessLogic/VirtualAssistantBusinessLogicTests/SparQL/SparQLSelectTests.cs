@@ -105,5 +105,25 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
             // Assert
             Assert.AreEqual(expected, actual);
         }
+
+        [Test]
+        public void ToString_ReverseOrderOfFromAndSelect_CorrectStringReturned()
+        {
+            // Arrange
+            SparQLSelect sparQLSelect = this.CreateSparQLSelect();
+            EncodedSPO output = new($"?s1 ?p \"SUBJECT\"@en . ", $"?s1");
+            sparQLSelect.SPOEncoder
+                .EncodeSubject(Arg.Any<string>())
+                .Returns(output);
+            string expected = "SELECT ?s1 ?VALUELabel ";
+
+            // Act
+            sparQLSelect.Select("VALUE");
+            sparQLSelect.From("SUBJECT");
+            string actual = sparQLSelect.ToString();
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

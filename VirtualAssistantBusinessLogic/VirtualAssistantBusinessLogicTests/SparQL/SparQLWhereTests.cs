@@ -16,7 +16,7 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
         [SetUp]
         public void SetUp()
         {
-            EncodedSPO output = new($"?s1 ?p \"SUBJECT\"@en . ", $"?s1");
+            EncodedSPO output = new("?s1 ?p \"SUBJECT\"@en . ", "?s1");
             subSPOEncoder = Substitute.For<ISPOEncoder>();
             subSPOEncoder
                 .EncodeSubject(Arg.Any<string>())
