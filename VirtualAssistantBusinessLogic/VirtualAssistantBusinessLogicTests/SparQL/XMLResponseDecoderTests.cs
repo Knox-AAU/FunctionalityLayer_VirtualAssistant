@@ -34,7 +34,7 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
         public void Decode_ChrisEvansStreamIsGiven_ResultsArrayIsFilledAndIncludesCertainEvans()
         {
             // Arrange
-            XMLResponseDecoder xMLResponseDecoder = CreateXMLResponseDecoder();
+            XMLResponseDecoder xmlResponseDecoder = CreateXMLResponseDecoder();
             Stream stream = CreateChrisEvansFileStream();
             List<String> ExpectedResult = new()
             {
@@ -44,7 +44,7 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
                 "wd:Q5392352"
             };
             // Act
-            Dictionary<string, Dictionary<string, List<string>>> result = xMLResponseDecoder.Decode(stream);
+            Dictionary<string, Dictionary<string, List<string>>> result = xmlResponseDecoder.Decode(stream);
 
             // Assert
             Assert.That(result.Count == 19);
