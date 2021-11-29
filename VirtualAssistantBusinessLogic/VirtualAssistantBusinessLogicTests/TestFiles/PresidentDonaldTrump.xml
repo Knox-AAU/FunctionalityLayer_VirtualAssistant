@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<sparql xmlns='http://www.w3.org/2005/sparql-results#'>
+	<head>
+		<variable name='TypeLabel'/>
+		<variable name='OccupationLabel'/>
+		<variable name='birth_nameLabel'/>
+		<variable name='date_of_birthLabel'/>
+		<variable name='SpouseLabel'/>
+	</head>
+	<results>
+		<result>
+			<binding name='TypeLabel'>
+				<literal xml:lang='en'>human</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>politician</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>entrepreneur</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='OccupationLabel'>
+				<literal xml:lang='en'>business magnate</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='date_of_birthLabel'>
+				<literal>1946-06-14T00:00:00Z</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='birth_nameLabel'>
+				<literal>Donald John Trump</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='SpouseLabel'>
+				<literal xml:lang='en'>Melania Trump</literal>
+			</binding>
+		</result>
+	</results>
+</sparql>

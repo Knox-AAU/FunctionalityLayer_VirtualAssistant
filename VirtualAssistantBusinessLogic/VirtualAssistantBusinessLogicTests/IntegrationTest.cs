@@ -1,7 +1,10 @@
+using NSubstitute;
 using NUnit.Framework;
+using System.IO;
 using System.Collections.Generic;
 using VirtualAssistantBusinessLogic.KnowledgeGraph;
 using VirtualAssistantBusinessLogic.SparQL;
+using System;
 
 namespace VirtualAssistantBusinessLogicTests
 {
@@ -11,41 +14,20 @@ namespace VirtualAssistantBusinessLogicTests
         public void Setup()
         {
         }
-        /*
+        
         [Test]
         public void it_can_get_nodes_from_the_knowledge_graph_api()
         {
-            KnowledgeGraph kg = new KnowledgeGraph(new SparQLConnectionFactory());
+            KnowledgeGraph kg = GetKnowledgeGraph();
             List<KnowledgeGraphNode> results = kg.FindNodes("Chris Evans");
             Assert.AreEqual(21, results.Count);
             //TODO more asserts
         }
 
         [Test]
-        public void it_can_get_denmark_nodes_and_find_information_for_a_specific_denmark_from_the_knowledge_graph_api()
-        {
-            KnowledgeGraph kg = new KnowledgeGraph(new SparQLConnectionFactory());
-            List<KnowledgeGraphNode> results = kg.FindNodes("Denmark");
-            int index = -1;
-            for (int i = 0; i < results.Count; ++i)
-            {
-                KnowledgeGraphNode kgn = results[i];
-                if (kgn.Id == "wd:Q35")
-                {
-                    index = i;
-                    break;
-                }
-            }
-            Assert.IsTrue(index != -1, "The expected Denmark was not in the result list.");
-            KnowledgeGraphNode denmarkNode = kg.FindNodeInformation(results[index]);
-            Assert.AreEqual("Copenhagen", denmarkNode.Information["Capital"][0]);
-            //TODO more asserts
-        }
-
-        [Test]
         public void it_can_get_information_for_a_specific_node()
         {
-            KnowledgeGraph kg = new KnowledgeGraph(new SparQLConnectionFactory());
+            KnowledgeGraph kg = GetKnowledgeGraph();
             KnowledgeGraphNode result = kg.FindNodeInformation(GetDonaldTrumpKnowledgeGraphNode());
             Assert.IsTrue(result.Information.ContainsKey("Spouse"));
             Assert.AreEqual("Melania Trump", result.Information["Spouse"][0]);
@@ -76,7 +58,29 @@ namespace VirtualAssistantBusinessLogicTests
             node.Information["Type"].Add("autonomous country within the Kingdom of Denmark");
             return node;
         }
-        */
 
+        private ISparQLConnection GetWikidataSparQLConnectionMock()
+        {
+            XMLResponseDecoder responseDecoder = new();
+            ISparQLConnection wikidataSparqlMock = Substitute.For<WikidataSparQLConnection>(responseDecoder);
+
+            Stream xmlStream = File.OpenRead("../../../TestFiles/PresidentDonaldTrump.xml");
+
+            wikidataSparqlMock.ExecuteQuery(Arg.Is<string>(x => ContainsAnIdentifyingVariableInQuery(x)).Returns(responseDecoder.Decode(xmlStream));
+
+            return wikidataSparqlMock;
+        }
+
+        private KnowledgeGraph GetKnowledgeGraph()
+        {
+            var stub = Substitute.For<ISparQLConnectionFactory>();
+            stub.GetConnection().Returns(_ => GetWikidataSparQLConnectionMock());
+            return new KnowledgeGraph(stub);
+        }
+
+        public static bool ContainsAnIdentifyingVariableInQuery(string query)
+        {
+            return query.Contains("?s0");
+        }
     }
 }
