@@ -27,7 +27,7 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
         {
             ISparQLConnection sparqlConnection = SparQLConnectionFactory.GetConnection();
             // Get the types from the node that are supported by the connection
-            IEnumerable<string> supportedTypesInNode = sparqlConnection.SupportedTypes.Intersect(node.Information["Type"]);
+            IEnumerable<string> supportedTypesInNode = sparqlConnection.SupportedTypesIntersection(node.Information["Type"]);
             // If the connection does not support any of the node's types return the node as it is
             if (!supportedTypesInNode.Any())
             {
