@@ -49,20 +49,6 @@ namespace VirtualAssistantBusinessLogicTests.SparQL
         }
 
         [Test]
-        public void SubjectIs_NoEncodedSPO_SubjectStringCorrect()
-        {
-            // Arrange
-            SparQLWhere sparQLWhere = this.CreateSparQLWhere();
-            string subject = "TEST";
-
-
-            // Act // Assert
-            Assert.Throws<KeyNotFoundException>(
-                () => sparQLWhere.SubjectIs(subject)
-                );
-        }
-
-        [Test]
         public void PredicateIs_HasEncodedSPO_PredicateStringCorrect()
         {
             // Arrange
