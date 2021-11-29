@@ -72,10 +72,8 @@ namespace VirtualAssistantBusinessLogic.SparQL
 
         public IEnumerable<string> SupportedTypesIntersection(List<string> strings)
         {
-            for(int i = 0; i < strings.Count; ++i)
-            {
-                strings[i] = strings[i].ToLower();
-            }
+            strings = strings.ConvertAll(d => d.ToLower());
+
             return SupportedTypes.Intersect(strings);
         }
     }
