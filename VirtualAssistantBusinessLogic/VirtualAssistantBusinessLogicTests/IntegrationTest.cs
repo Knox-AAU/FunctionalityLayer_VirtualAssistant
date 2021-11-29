@@ -66,7 +66,9 @@ namespace VirtualAssistantBusinessLogicTests
 
             Stream xmlStream = File.OpenRead("../../../TestFiles/PresidentDonaldTrump.xml");
 
-            wikidataSparqlMock.ExecuteQuery(Arg.Is<string>(x => ContainsAnIdentifyingVariableInQuery(x)).Returns(responseDecoder.Decode(xmlStream));
+            wikidataSparqlMock
+                .ExecuteQuery(Arg.Is<string>(x => x.Contains("?s0"))
+                .Returns(responseDecoder.Decode(xmlStream));
 
             return wikidataSparqlMock;
         }
