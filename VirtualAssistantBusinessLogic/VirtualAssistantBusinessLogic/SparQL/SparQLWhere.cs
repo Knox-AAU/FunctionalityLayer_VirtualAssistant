@@ -23,31 +23,28 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 EncodedSPOs.Add(SparQLSelect.FromSubjectRaw, SparQLSelect.FromSubject);
             }
         }
-        private string SubjectString { get; set; } = "";
-        private string ObjectString { get; set; } = "";
-        private string PredicateString { get; set; } = "";
-        private List<string> Conditions { get; set; }
+        public string SubjectString { get; private set; } = "";
+        public string ObjectString { get; private set; } = "";
+        public string PredicateString { get; private set; } = "";
+        public List<string> Conditions { get; private set; }
         private const string labelServiceSparQL = "SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". }";
         public SparQLSelect SparQLSelect;
-        private Dictionary<string, EncodedSPO> EncodedSPOs { get; set; }
+        public Dictionary<string, EncodedSPO> EncodedSPOs { get; private set; }
 
         /// <summary>
         /// Specifies the subject of the sparql triplet as being equal to the
         /// input subject.
         /// </summary>
         /// <param name="subject">Subject of the sparql triplet</param>
-        /// <returns></returns>
+        /// <returns>SparQLWhere object</returns>
         public SparQLWhere SubjectIs(string subject)
         {
-            if (EncodedSPOs.ContainsKey(subject))
-            {
-                SubjectString = EncodedSPOs[subject].Name;
-            }
-            else
-            {
-                SubjectString = subject;
-            }
-            if (TripletIsDone())
+            if (SubjectString != "") throw new ArgumentException("Subject in query has already been set. Finish current condition first");
+
+            // Subject can either be encoded (if ID is unknown) or an ID
+            SubjectString = EncodedSPOs.ContainsKey(subject) ? EncodedSPOs[subject].Name : subject;
+
+            if (IsTripletDone())
             {
                 AddCondition();
             }
@@ -59,64 +56,18 @@ namespace VirtualAssistantBusinessLogic.SparQL
         /// input parameter.
         /// </summary>
         /// <param name="predicate">Predicate of the sparql triplet</param>
-        /// <returns></returns>
+        /// <returns>SparQLWhere object</returns>
         public SparQLWhere PredicateIs(string predicate)
         {
-            if (EncodedSPOs.ContainsKey(predicate))
-            {
-                PredicateString = EncodedSPOs[predicate].Name;
-            }
-            else
-            {
-                PredicateString = predicate;
-            }
-            if (TripletIsDone())
-            {
-                AddCondition();
-            }
-            return this;
-        }
+            if (PredicateString != "") throw new ArgumentException("Predicate in query has already been set. Finish current condition first");
 
-        /// <summary>
-        /// Specifies the object of the sparql triplet as being equal to the
-        /// input parameter.
-        /// </summary>
-        /// <param name="obj">Object of the sparql triplet</param>
-        /// <returns></returns>
-        public SparQLWhere ObjectIs(string obj)
-        {
-            ObjectString = obj;
-            if (TripletIsDone())
+            if (!EncodedSPOs.ContainsKey(predicate))
             {
-                AddCondition();
+                throw new KeyNotFoundException("Encoded SPO does not include the predicate key");
             }
-            return this;
-        }
 
-        /// <summary>
-        /// Specifies the name of the variable
-        /// </summary>
-        /// <param name="subject">name of the subject variable</param>
-        /// <returns></returns>
-        public SparQLWhere SubjectAs(string subject)
-        {
-            SubjectString = $"?{subject}";
-            if (TripletIsDone())
-            {
-                AddCondition();
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Specifies the name of the variable
-        /// </summary>
-        /// <param name="predicate">name of the predicate variable</param>
-        /// <returns></returns>
-        public SparQLWhere PredicateAs(string predicate)
-        {
-            PredicateString = $"?{predicate}";
-            if (TripletIsDone())
+            PredicateString = EncodedSPOs[predicate].Name;
+            if (IsTripletDone())
             {
                 AddCondition();
             }
@@ -127,11 +78,13 @@ namespace VirtualAssistantBusinessLogic.SparQL
         /// Specifies the name of the variable
         /// </summary>
         /// <param name="obj">name of the object variable</param>
-        /// <returns></returns>
-        public SparQLWhere ObjectAs(string obj)
+        /// <returns>SparQLWhere object</returns>
+        public SparQLWhere GetObjectIn(string obj)
         {
+            if (ObjectString != "") throw new ArgumentException("Object in query has already been set. Finish current condition first");
+
             ObjectString = $"?{obj}";
-            if (TripletIsDone())
+            if (IsTripletDone())
             {
                 AddCondition();
             }
@@ -141,8 +94,8 @@ namespace VirtualAssistantBusinessLogic.SparQL
         /// <summary>
         /// Checks wether the subject, predicate, and the object all have a value
         /// </summary>
-        /// <returns></returns>
-        private bool TripletIsDone()
+        /// <returns>whether triplet is done</returns>
+        private bool IsTripletDone()
         {
             if (SubjectString != "" && PredicateString != "" && ObjectString != "")
             {
@@ -194,7 +147,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 //The strings should all be empty or a partial triplet is in progress
                 throw new Exception("WHERE triplet is not done");
             }
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             //Since we use fluent we need to include the select's ToString as well
             sb.Append(SparQLSelect.ToString());
             //Start the WHERE
@@ -213,11 +166,11 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 }
                 sb.Append(" {");
                 sb.Append(str);
-                sb.Append("}");
+                sb.Append('}');
                 firstInUnion = false;
             }
             sb.Append(" " + labelServiceSparQL);
-            sb.Append("}");
+            sb.Append('}');
             return sb.ToString();
         }
     }

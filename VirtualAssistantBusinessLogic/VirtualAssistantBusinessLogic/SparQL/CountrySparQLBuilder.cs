@@ -17,18 +17,18 @@ namespace VirtualAssistantBusinessLogic.SparQL
         {
             string subject = Query;
 
-            SparQLSelect sparQLSelect = new SparQLSelect(SPOEncoder);
+            SparQLSelect sparQLSelect = new(SPOEncoder);
 
             //Return the SparQL string
-            return sparQLSelect //TODO: make function for this
+            return sparQLSelect
                         .Select("Type", "Continent", "Official_language", "Capital", "Population")
                         .Where()
                             .EncodePredicates("Type", "Continent", "Official language", "Capital", "Population")
-                            .SubjectIs(subject).PredicateIs("Type").ObjectAs("Type")
-                            .SubjectIs(subject).PredicateIs("Continent").ObjectAs("Continent")
-                            .SubjectIs(subject).PredicateIs("Official language").ObjectAs("Official_language")
-                            .SubjectIs(subject).PredicateIs("Capital").ObjectAs("Capital")
-                            .SubjectIs(subject).PredicateIs("Population").ObjectAs("Population")
+                            .SubjectIs(subject).PredicateIs("Type").GetObjectIn("Type")
+                            .SubjectIs(subject).PredicateIs("Continent").GetObjectIn("Continent")
+                            .SubjectIs(subject).PredicateIs("Official language").GetObjectIn("Official_language")
+                            .SubjectIs(subject).PredicateIs("Capital").GetObjectIn("Capital")
+                            .SubjectIs(subject).PredicateIs("Population").GetObjectIn("Population")
                         .ToString();
         }
     }

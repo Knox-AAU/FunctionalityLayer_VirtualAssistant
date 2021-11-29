@@ -14,5 +14,6 @@ namespace VirtualAssistantBusinessLogic.SparQL
         public List<string> SupportedTypes { get; }
         public SparQLBuilder GetSparQLBuilder(string type);
         public Dictionary<string, Dictionary<string, List<string>>> ExecuteQuery(string query);
+        public IEnumerable<string> SupportedTypesIntersection(List<string> strings);
     }
 }
