@@ -21,8 +21,8 @@ namespace VirtualAssistantBusinessLogic.SparQL
             ResponseDecoder = new XMLResponseDecoder();
             SupportedTypes = new List<string> {
                 "", // Unknown entity - used to identify the entity
-                "Human",
-                "Country"
+                "human",
+                "country"
             };
         }
 
@@ -68,6 +68,15 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 "country" => new CountrySparQLBuilder(spoEncoder),
                 _ => throw new ArgumentException($"{type} has no SparQLBuilder associated."),
             };
+        }
+
+        public IEnumerable<string> SupportedTypesIntersection(List<string> strings)
+        {
+            for(int i = 0; i < strings.Count; ++i)
+            {
+                strings[i] = strings[i].ToLower();
+            }
+            return SupportedTypes.Intersect(strings);
         }
     }
 }

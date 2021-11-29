@@ -41,12 +41,9 @@ namespace VirtualAssistantBusinessLogic.SparQL
         {
             if (SubjectString != "") throw new ArgumentException("Subject in query has already been set. Finish current condition first");
 
-            if (!EncodedSPOs.ContainsKey(subject))
-            {
-                throw new KeyNotFoundException("Encoded SPO does not include the subject key");
-            }
+            // Subject can either be encoded (if ID is unknown) or an ID
+            SubjectString = EncodedSPOs.ContainsKey(subject) ? EncodedSPOs[subject].Name : subject; 
 
-            SubjectString = EncodedSPOs[subject].Name;
             if (IsTripletDone())
             {
                 AddCondition();
