@@ -69,12 +69,17 @@ namespace VirtualAssistantBusinessLogic.SparQL
                 _ => throw new ArgumentException($"{type} has no SparQLBuilder associated."),
             };
         }
-
-        public IEnumerable<string> SupportedTypesIntersection(List<string> strings)
+        /// <summary>
+        /// Returns the types from the parameter, that intersects 
+        /// with the supported types of this connection
+        /// </summary>
+        /// <param name="types">A list of types to check against the supported types</param>
+        /// <returns>The types in the intersection with the supported types</returns>
+        public IEnumerable<string> SupportedTypesIntersection(IEnumerable<string> types)
         {
-            strings = strings.ConvertAll(d => d.ToLower());
+            types = types.Select(d => d.ToLower());
 
-            return SupportedTypes.Intersect(strings);
+            return SupportedTypes.Intersect(types);
         }
     }
 }
