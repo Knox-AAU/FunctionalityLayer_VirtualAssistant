@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using VirtualAssistantBusinessLogic.SparQL;
 using System.Collections.Generic;
+using System;
 
 namespace VirtualAssistantBusinessLogic.KnowledgeGraph
 {
@@ -25,6 +26,8 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
         /// <returns>The input node now containing information for the node</returns>
         public KnowledgeGraphNode FindNodeInformation(KnowledgeGraphNode node)
         {
+            ValidateFindNodeInformationArguments(node);
+
             ISparQLConnection sparqlConnection = SparQLConnectionFactory.GetConnection();
             // Get the types from the node that are supported by the connection
             IEnumerable<string> supportedTypesInNode = sparqlConnection.SupportedTypesIntersection(node.Information["Type"]);
@@ -56,6 +59,8 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
         /// to select which node is correct, so that more information can be read for that node</returns>
         public List<KnowledgeGraphNode> FindNodes(string query)
         {
+            if (string.IsNullOrWhiteSpace(query)) { throw new ArgumentException(); }
+
             ISparQLConnection sparqlConnection = SparQLConnectionFactory.GetConnection();
             ISparQLBuilder sparqlBuilder = sparqlConnection.GetSparQLBuilder("");
             sparqlBuilder.Query = query;
@@ -77,6 +82,19 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
             }
 
             return nodeList;
+        }
+
+        /// <summary>
+        /// Validates the arguments for the FindNodeInformation method
+        /// </summary>
+        /// <param name="node">Must not be empty. Must contain a type key in the information. Must have a set ID.</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentException">If not containing needed information</exception>
+        private void ValidateFindNodeInformationArguments(KnowledgeGraphNode node)
+        {
+            if (node == null) { throw new ArgumentNullException(); }
+            if (!node.Information.ContainsKey("Type")) { throw new ArgumentException("Node information must contain type to find more information about the node"); }
+            if (string.IsNullOrWhiteSpace(node.Id) || node.Id == "_") { throw new ArgumentException("Node ID must be set to find more information about the node"); }
         }
     }
 }
