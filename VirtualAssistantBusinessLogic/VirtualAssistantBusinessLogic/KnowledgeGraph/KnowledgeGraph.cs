@@ -10,12 +10,12 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
     /// </summary>
     public class KnowledgeGraph
     {
-        public KnowledgeGraph(SparQLConnectionFactory sparQLConnectionFactory)
+        public KnowledgeGraph(ISparQLConnectionFactory sparQLConnectionFactory)
         {
             SparQLConnectionFactory = sparQLConnectionFactory;
         }
 
-        private SparQLConnectionFactory SparQLConnectionFactory { get; set; }
+        private ISparQLConnectionFactory SparQLConnectionFactory { get; set; }
 
         /// <summary>
         /// Takes a knowledge graph node and gets the relevant information for that node based on
