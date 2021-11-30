@@ -20,7 +20,7 @@ namespace VirtualAssistantBusinessLogicTests
         {
             KnowledgeGraph kg = GetKnowledgeGraph();
             List<KnowledgeGraphNode> results = kg.FindNodes("Chris Evans");
-            Assert.AreEqual(21, results.Count);
+            Assert.AreEqual(19, results.Count);
             //TODO more asserts
         }
 
@@ -43,34 +43,43 @@ namespace VirtualAssistantBusinessLogicTests
             node.Information["Type"].Add("human");
             return node;
         }
-        private KnowledgeGraphNode GetDenmarkKnowledgeGraphNode()
-        {
-            KnowledgeGraphNode node = new KnowledgeGraphNode();
-            node.Id = "wd:Q35";
-            node.Name = "Denmark";
-            node.Information = new Dictionary<string, List<string>>();
-            node.Information["Type"] = new List<string>();
-            node.Information["Type"].Add("country");
-            node.Information["Type"].Add("state");
-            node.Information["Type"].Add("sovereign state");
-            node.Information["Type"].Add("colonial power");
-            node.Information["Type"].Add("country bordering the Baltic Sea");
-            node.Information["Type"].Add("autonomous country within the Kingdom of Denmark");
-            return node;
-        }
 
         private ISparQLConnection GetWikidataSparQLConnectionMock()
         {
             XMLResponseDecoder responseDecoder = new();
-            ISparQLConnection wikidataSparqlMock = Substitute.For<WikidataSparQLConnection>(responseDecoder);
+            ISparQLConnection wikidataSparqlConnectionMock = Substitute.For<ISparQLConnection>();
 
-            Stream xmlStream = File.OpenRead("../../../TestFiles/PresidentDonaldTrump.xml");
+            // Stream for all "Chris Evans"
+            Stream allChrisEvansXmlStream = File.OpenRead("../../../TestFiles/ChrisEvans.xml");
+            // Stream for former president Donald Trump
+            Stream donaldTrumpXmlStream = File.OpenRead("../../../TestFiles/PresidentDonaldTrump.xml");
 
-            wikidataSparqlMock
-                .ExecuteQuery(Arg.Is<string>(x => x.Contains("?s0"))
-                .Returns(responseDecoder.Decode(xmlStream));
+            // Use the xml streams instead of executing the queries
+            wikidataSparqlConnectionMock
+                .ExecuteQuery(Arg.Is<string>(x => x.Contains("\"Chris Evans\"")))
+                .Returns(responseDecoder.Decode(allChrisEvansXmlStream));
+            wikidataSparqlConnectionMock
+                .ExecuteQuery(Arg.Is<string>(x => x.Contains(GetDonaldTrumpKnowledgeGraphNode().Id)))
+                .Returns(responseDecoder.Decode(donaldTrumpXmlStream));
 
-            return wikidataSparqlMock;
+            // Supported types intersection
+            wikidataSparqlConnectionMock
+                .SupportedTypesIntersection(Arg.Is<List<string>>(x => x.Contains("human")))
+                .Returns(new List<string> { "human" });
+            wikidataSparqlConnectionMock
+                .SupportedTypesIntersection(Arg.Is<List<string>>(x => x.Contains("")))
+                .Returns(new List<string> { "" });
+
+            // Sparql builder
+            ISPOEncoder spoEncoder = new WikidataSPOEncoder();
+            wikidataSparqlConnectionMock
+                .GetSparQLBuilder(Arg.Is("human"))
+                .Returns(new PersonSparQLBuilder(spoEncoder));
+            wikidataSparqlConnectionMock
+                .GetSparQLBuilder(Arg.Is(""))
+                .Returns(new UnknownSparQLBuilder(spoEncoder));
+
+            return wikidataSparqlConnectionMock;
         }
 
         private KnowledgeGraph GetKnowledgeGraph()
