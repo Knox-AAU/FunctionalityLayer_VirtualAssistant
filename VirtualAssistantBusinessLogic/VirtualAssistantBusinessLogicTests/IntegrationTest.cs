@@ -88,10 +88,5 @@ namespace VirtualAssistantBusinessLogicTests
             stub.GetConnection().Returns(_ => GetWikidataSparQLConnectionMock());
             return new KnowledgeGraph(stub);
         }
-
-        public static bool ContainsAnIdentifyingVariableInQuery(string query)
-        {
-            return query.Contains("?s0");
-        }
     }
 }

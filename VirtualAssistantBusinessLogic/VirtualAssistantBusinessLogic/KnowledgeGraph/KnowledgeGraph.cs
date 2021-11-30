@@ -70,7 +70,8 @@ namespace VirtualAssistantBusinessLogic.KnowledgeGraph
                 KnowledgeGraphNode node = new()
                 {
                     Id = kvp.Key,
-                    Information = kvp.Value
+                    Information = kvp.Value,
+                    Name = kvp.Value.ContainsKey("birth name") ? kvp.Value["birth name"].FirstOrDefault() : query,
                 };
 
                 nodeList.Add(node);
