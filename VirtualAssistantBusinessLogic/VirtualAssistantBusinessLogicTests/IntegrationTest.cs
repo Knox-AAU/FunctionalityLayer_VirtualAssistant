@@ -14,7 +14,7 @@ namespace VirtualAssistantBusinessLogicTests
         public void Setup()
         {
         }
-        
+
         [Test]
         public void it_can_get_nodes_from_the_knowledge_graph_api()
         {
