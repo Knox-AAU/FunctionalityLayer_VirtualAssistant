@@ -1,4 +1,4 @@
-name: BusinessLogic .NET Test
+name: .NET Tests
 
 on:
   push:
