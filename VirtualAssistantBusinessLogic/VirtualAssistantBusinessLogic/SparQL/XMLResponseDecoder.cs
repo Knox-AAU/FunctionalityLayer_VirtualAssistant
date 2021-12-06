@@ -106,7 +106,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
             var match = filter.Match(xmlReader.ReadInnerXml());
             if (match.Success)
             {
-                id = "wd:" + match.Value;//TODO check if wd is always the case or if some needs another prefix based on the uri
+                id = "wd:" + match.Value;
             }
             else
             {
