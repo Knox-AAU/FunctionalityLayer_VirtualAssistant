@@ -17,14 +17,14 @@ namespace VirtualAssistantBusinessLogic.SparQL
         public override string GetSparQLTemplate(string subject, SparQLSelect sparQLSelect)
         {
             return sparQLSelect
-                        .Select("Type", "Continent", "Official_language", "Capital", "Population")
+                        .Select("Type", "Occupation", "birth_name", "date_of_birth", "Spouse")
                         .Where()
-                            .EncodePredicates("Type", "Continent", "Official language", "Capital", "Population")
+                            .EncodePredicates("Type", "Occupation", "birth name", "date of birth", "Spouse")
                             .SubjectIs(subject).PredicateIs("Type").GetObjectIn("Type")
-                            .SubjectIs(subject).PredicateIs("Continent").GetObjectIn("Continent")
-                            .SubjectIs(subject).PredicateIs("Official language").GetObjectIn("Official_language")
-                            .SubjectIs(subject).PredicateIs("Capital").GetObjectIn("Capital")
-                            .SubjectIs(subject).PredicateIs("Population").GetObjectIn("Population")
+                            .SubjectIs(subject).PredicateIs("Occupation").GetObjectIn("Occupation")
+                            .SubjectIs(subject).PredicateIs("birth name").GetObjectIn("birth_name")
+                            .SubjectIs(subject).PredicateIs("date of birth").GetObjectIn("date_of_birth")
+                            .SubjectIs(subject).PredicateIs("Spouse").GetObjectIn("Spouse")
                         .ToString();
         }
     }
