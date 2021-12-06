@@ -13,13 +13,9 @@ namespace VirtualAssistantBusinessLogic.SparQL
     public class CountrySparQLBuilder : SparQLBuilder
     {
         public CountrySparQLBuilder(ISPOEncoder spoEncoder) : base(spoEncoder) { }
-        public override string Build()
+
+        public override string GetSparQLTemplate(string subject, SparQLSelect sparQLSelect)
         {
-            string subject = Query;
-
-            SparQLSelect sparQLSelect = new(SPOEncoder);
-
-            //Return the SparQL string
             return sparQLSelect
                         .Select("Type", "Continent", "Official_language", "Capital", "Population")
                         .Where()

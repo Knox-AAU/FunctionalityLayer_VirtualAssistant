@@ -13,21 +13,18 @@ namespace VirtualAssistantBusinessLogic.SparQL
     public class PersonSparQLBuilder : SparQLBuilder
     {
         public PersonSparQLBuilder(ISPOEncoder spoEncoder) : base(spoEncoder) { }
-        public override string Build()
-        {
-            string subject = Query;
 
-            SparQLSelect sparQLSelect = new(SPOEncoder);
-            //Return the SparQL string
+        public override string GetSparQLTemplate(string subject, SparQLSelect sparQLSelect)
+        {
             return sparQLSelect
-                        .Select("Type", "Occupation", "birth_name", "date_of_birth", "Spouse")
+                        .Select("Type", "Continent", "Official_language", "Capital", "Population")
                         .Where()
-                            .EncodePredicates("Type", "Occupation", "birth name", "date of birth", "Spouse")
+                            .EncodePredicates("Type", "Continent", "Official language", "Capital", "Population")
                             .SubjectIs(subject).PredicateIs("Type").GetObjectIn("Type")
-                            .SubjectIs(subject).PredicateIs("Occupation").GetObjectIn("Occupation")
-                            .SubjectIs(subject).PredicateIs("birth name").GetObjectIn("birth_name")
-                            .SubjectIs(subject).PredicateIs("date of birth").GetObjectIn("date_of_birth")
-                            .SubjectIs(subject).PredicateIs("Spouse").GetObjectIn("Spouse")
+                            .SubjectIs(subject).PredicateIs("Continent").GetObjectIn("Continent")
+                            .SubjectIs(subject).PredicateIs("Official language").GetObjectIn("Official_language")
+                            .SubjectIs(subject).PredicateIs("Capital").GetObjectIn("Capital")
+                            .SubjectIs(subject).PredicateIs("Population").GetObjectIn("Population")
                         .ToString();
         }
     }
