@@ -32,14 +32,14 @@ namespace VirtualAssistantBusinessLogic.SparQL
 
             SparQLSelect sparQLSelect = new(SPOEncoder);
             //Return the SparQL string
-            return GetSparQLTemplate(subject, sparQLSelect);
+            return GetSparQLQuery(subject, sparQLSelect);
         }
 
         /// <summary>
-        /// Method for getting the SparQL template of a class
+        /// Method for getting the SparQL query using a template
         /// </summary>
-        /// <returns>A the SparQL Template in string format.</returns>
-        public virtual string GetSparQLTemplate(string subject, SparQLSelect sparQLSelect)
+        /// <returns>SparQL query in string format.</returns>
+        public virtual string GetSparQLQuery(string subject, SparQLSelect sparQLSelect)
         {
             return sparQLSelect
                         .Select("Type")
