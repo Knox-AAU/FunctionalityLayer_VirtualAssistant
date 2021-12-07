@@ -13,12 +13,9 @@ namespace VirtualAssistantBusinessLogic.SparQL
     public class UnknownSparQLBuilder : SparQLBuilder
     {
         public UnknownSparQLBuilder(ISPOEncoder spoEncoder) : base(spoEncoder) { }
-        public override string Build()
-        {
-            string subject = Query;
 
-            SparQLSelect sparQLSelect = new SparQLSelect(SPOEncoder);
-            //Return the SparQL string
+        public override string GetSparQLQuery(string subject, SparQLSelect sparQLSelect)
+        {
             return sparQLSelect
                         .Select("Type", "Occupation", "birth_name", "date_of_birth", "Spouse")
                             .From(subject)
