@@ -22,6 +22,7 @@ namespace VirtualAssistantAPI.Controllers
         [HttpGet]
         [Route("getNodes")]
         [ProducesResponseType(typeof(KnowledgeGraphNode), 200)]
+        [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         public IActionResult GetNodes(string name)
@@ -32,12 +33,17 @@ namespace VirtualAssistantAPI.Controllers
             }
             KnowledgeGraph graph = new KnowledgeGraph(new SparQLConnectionFactory());
             var nodes = graph.FindNodes(name);
+            if (nodes == null || nodes.Count() == 0)
+            {
+                return NoContent();
+            }
             return new JsonResult(nodes);
         }
 
         [HttpGet]
         [Route("getNode")]
         [ProducesResponseType(typeof(KnowledgeGraphNode), 200)]
+        [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         //public KnowledgeGraphNode GetNode(string id, string type) //This is the correct version, but for the MVP we use the one below
@@ -51,7 +57,7 @@ namespace VirtualAssistantAPI.Controllers
             var nodes = graph.FindNodes(name);
             if (nodes == null || nodes.Count() == 0)
             {
-                return null;
+                return NoContent();
             }
             var node = graph.FindNodeInformation(nodes.First());
             return new JsonResult(node);
