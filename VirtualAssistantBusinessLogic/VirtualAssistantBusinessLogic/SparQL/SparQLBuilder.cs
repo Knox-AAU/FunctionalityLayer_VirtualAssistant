@@ -36,7 +36,7 @@ namespace VirtualAssistantBusinessLogic.SparQL
         }
 
         /// <summary>
-        /// Method for getting the SparQL using the template
+        /// Method for getting the SparQL query using a template
         /// </summary>
         /// <returns>SparQL query in string format.</returns>
         public virtual string GetSparQLQuery(string subject, SparQLSelect sparQLSelect)
